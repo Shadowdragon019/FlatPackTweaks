@@ -7,6 +7,9 @@
 	},
 	"refmap": "mixins.flat_pack_tweaks.refmap.json",
 	"mixins": [
-		"BlockBreakingKineticBlockEntityMixin"
+		"BlockBreakingKineticBlockEntityMixin",
+		"CreateJeiMixin",
+		"ItemMixin",
+		"WrenchItemMixin"
 	]
 }

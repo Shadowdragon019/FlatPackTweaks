@@ -16,7 +16,9 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Fpt.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FptConfig {
@@ -35,6 +37,15 @@ public class FptConfig {
             }
             return false;
         });
+
+    public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES =
+        BUILDER.define("remove_toolbox_recipes", true);
+
+    public static final ForgeConfigSpec.BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
+        BUILDER.define("wrench_can_pickup_anything_destructible", true);
+
+    public static final ForgeConfigSpec.BooleanValue ALL_ITEMS_ARE_FIREPROOF =
+        BUILDER.define("all_items_are_fireproof", true);
 
     private static final HashMap<Block, Item> INFINI_DRILLING_MAP = new HashMap<>();
 
