@@ -1,0 +1,85 @@
+package lol.roxxane.flat_pack_tweaks.config;
+
+import com.electronwill.nightconfig.core.CommentedConfig;
+import com.electronwill.nightconfig.core.UnmodifiableConfig;
+import com.google.common.collect.ImmutableMap;
+import lol.roxxane.flat_pack_tweaks.Fpt;
+import lol.roxxane.flat_pack_tweaks.FptUtils;
+import lol.roxxane.flat_pack_tweaks.jei.InfiniDrillingRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+@Mod.EventBusSubscriber(modid = Fpt.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class FptConfig {
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+
+    private static final ForgeConfigSpec.ConfigValue<CommentedConfig> INFINI_DRILLING_MAP_VALUE =
+        BUILDER.comment("Block to item").define("drilling_map", FptUtils.new_config(
+            "raw_iron_block", "raw_iron"
+        ), o -> {
+            if (o instanceof UnmodifiableConfig config) {
+                for (var entry : config.entrySet())
+                    if (!blocks_exists(entry.getKey()) ||
+                        !(entry.getValue() instanceof String) || !item_exists(entry.getValue()))
+                        return false;
+                return true;
+            }
+            return false;
+        });
+
+    private static final HashMap<Block, Item> INFINI_DRILLING_MAP = new HashMap<>();
+
+    public static final ForgeConfigSpec SPEC = BUILDER.build();
+
+    private static Item get_item(String string) {
+        return ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(string));
+    }
+    private static boolean item_exists(String string) {
+        return ForgeRegistries.ITEMS.containsKey(ResourceLocation.parse(string));
+    }
+    private static Block get_block(String string) {
+        return ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(string));
+    }
+    private static boolean blocks_exists(String string) {
+        return ForgeRegistries.BLOCKS.containsKey(ResourceLocation.parse(string));
+    }
+
+    @SubscribeEvent
+    static void on_load(final ModConfigEvent event) {
+        INFINI_DRILLING_MAP.clear();
+
+        if (SPEC.isLoaded()) {
+            INFINI_DRILLING_MAP_VALUE.get().valueMap().forEach((key, value) ->
+                INFINI_DRILLING_MAP.put(get_block(key), get_item((String) value)));
+        }
+    }
+
+    // INFINI DRILLING
+    public static boolean can_infini_drill(Block block) {
+        return INFINI_DRILLING_MAP.containsKey(block);
+    }
+    public static @Nullable Item get_infini_drilling_result(Block block) {
+        return INFINI_DRILLING_MAP.get(block);
+    }
+    public static ImmutableMap<Block, Item> get_infini_drilling_map() {
+        return ImmutableMap.copyOf(INFINI_DRILLING_MAP);
+    }
+    public static List<InfiniDrillingRecipe> get_infini_drill_recipes() {
+        return INFINI_DRILLING_MAP.entrySet().stream().collect(
+            // Make a new array list to put the recipes into
+	        ArrayList::new,
+            // Put the recipe into the array
+            (list, entry) -> list.add(new InfiniDrillingRecipe(entry.getKey(), entry.getValue())),
+            // I don't really get what's going on here
+	        ArrayList::addAll);
+    }
+}

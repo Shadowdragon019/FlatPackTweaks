@@ -1,0 +1,121 @@
+[26Apr2025 02:08:31.683] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, /home/mainy/.gradle/caches/forge_gradle/assets, --gameDir, ., --fml.forgeVersion, 47.4.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, flat_pack_tweaks, --all, --output, /home/mainy/IdeaProjects/Flat Pack Tweaks/src/generated/resources, --existing, /home/mainy/IdeaProjects/Flat Pack Tweaks/src/main/resources, --mixin.config, mixins.flat_pack_tweaks.json]
+[26Apr2025 02:08:31.686] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.9 by JetBrains s.r.o.; OS Linux arch amd64 version 6.11.9-200.fsync.fc40.x86_64
+[26Apr2025 02:08:31.755] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /home/mainy/IdeaProjects/Flat Pack Tweaks/run-data/config/fml.toml is not correct. Correcting
+[26Apr2025 02:08:31.756] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[26Apr2025 02:08:31.756] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[26Apr2025 02:08:31.756] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[26Apr2025 02:08:31.757] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[26Apr2025 02:08:31.769] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[26Apr2025 02:08:31.806] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/mainy/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23116!/ Service=ModLauncher Env=CLIENT
+[26Apr2025 02:08:32.080] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/mainy/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.0/f0c0b352173d0a378cbdcec9cfc4ba65899a721/javafmllanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[26Apr2025 02:08:32.081] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/mainy/.gradle/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.0/e862740d8c84d08dbfedea412bef88fe42e727c5/lowcodelanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[26Apr2025 02:08:32.082] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/mainy/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.0/5719b3a297a33f877ed5dde4cb4bd75c859096af/mclanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[26Apr2025 02:08:32.083] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /home/mainy/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.0/235975dafa4309945b59c56b53f31dc5b65a6051/fmlcore-1.20.1-47.4.0.jar is missing mods.toml file
+[26Apr2025 02:08:32.227] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[26Apr2025 02:08:33.442] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by mixins.flat_pack_tweaks.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[26Apr2025 02:08:33.443] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[26Apr2025 02:08:33.443] [main/ERROR] [mixin/]: Mixin config mixins.flat_pack_tweaks.json does not specify "minVersion" property
+[26Apr2025 02:08:33.457] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, /home/mainy/.gradle/caches/forge_gradle/assets, --assetIndex, 5, --mod, flat_pack_tweaks, --all, --output, /home/mainy/IdeaProjects/Flat Pack Tweaks/src/generated/resources, --existing, /home/mainy/IdeaProjects/Flat Pack Tweaks/src/main/resources]
+[26Apr2025 02:08:33.478] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[26Apr2025 02:08:33.479] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[26Apr2025 02:08:33.482] [main/INFO] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[26Apr2025 02:08:33.483] [main/INFO] [mixin/]: Selecting config mixins.flat_pack_tweaks.json
+[26Apr2025 02:08:33.485] [main/WARN] [mixin/]: Reference map 'mixins.flat_pack_tweaks.refmap.json' for mixins.flat_pack_tweaks.json could not be read. If this is a development environment you can ignore this message
+[26Apr2025 02:08:33.486] [main/INFO] [mixin/]: Selecting config mixinextras.init.mixins.json
+[26Apr2025 02:08:33.558] [main/INFO] [mixin/]: Selecting config flywheel.backend.mixins.json
+[26Apr2025 02:08:33.745] [main/INFO] [mixin/]: Remapping refMap backend-flywheel.refmap.json using /home/mainy/IdeaProjects/Flat Pack Tweaks/build/createSrgToMcp/output.srg
+[26Apr2025 02:08:33.745] [main/INFO] [mixin/]: Selecting config flywheel.impl.mixins.json
+[26Apr2025 02:08:33.750] [main/INFO] [mixin/]: Remapping refMap flywheel.refmap.json using /home/mainy/IdeaProjects/Flat Pack Tweaks/build/createSrgToMcp/output.srg
+[26Apr2025 02:08:33.750] [main/INFO] [mixin/]: Selecting config ponder.mixins.json
+[26Apr2025 02:08:33.754] [main/INFO] [mixin/]: Remapping refMap ponder.refmap.json using /home/mainy/IdeaProjects/Flat Pack Tweaks/build/createSrgToMcp/output.srg
+[26Apr2025 02:08:33.755] [main/INFO] [mixin/]: Selecting config create.mixins.json
+[26Apr2025 02:08:33.759] [main/INFO] [mixin/]: Remapping refMap create.refmap.json using /home/mainy/IdeaProjects/Flat Pack Tweaks/build/createSrgToMcp/output.srg
+[26Apr2025 02:08:33.759] [main/INFO] [mixin/]: Preparing mixins.flat_pack_tweaks.json (1)
+[26Apr2025 02:08:33.775] [main/INFO] [mixin/]: Preparing mixinextras.init.mixins.json (0)
+[26Apr2025 02:08:33.775] [main/INFO] [mixin/]: Preparing flywheel.backend.mixins.json (8)
+[26Apr2025 02:08:33.859] [main/INFO] [mixin/]: Preparing flywheel.impl.mixins.json (15)
+[26Apr2025 02:08:34.069] [main/INFO] [mixin/]: Preparing ponder.mixins.json (7)
+[26Apr2025 02:08:34.095] [main/INFO] [mixin/]: Preparing create.mixins.json (47)
+[26Apr2025 02:08:34.175] [main/WARN] [mixin/]: Error loading class: journeymap/client/ui/fullscreen/Fullscreen (java.lang.ClassNotFoundException: journeymap.client.ui.fullscreen.Fullscreen)
+[26Apr2025 02:08:34.176] [main/WARN] [mixin/]: @Mixin target journeymap.client.ui.fullscreen.Fullscreen was not found create.mixins.json:compat.JourneyFullscreenMapMixin
+[26Apr2025 02:08:34.198] [main/INFO] [mixin/]: Prepared 77 mixins in 0.715 sec (9.3ms avg) (0ms load, 0ms transform, 0ms plugin)
+[26Apr2025 02:08:34.360] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [flat_pack_tweaks]
+[26Apr2025 02:08:34.365] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[26Apr2025 02:08:34.369] [main/INFO] [mixin/]: Mixing BuiltInRegistriesMixin from create.mixins.json into net.minecraft.core.registries.BuiltInRegistries
+[26Apr2025 02:08:34.372] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$ourRegistriesAreNotEmpty$0(Ljava/util/function/Consumer;Lnet/minecraft/core/Registry;)V to mdc22052$lambda$create$ourRegistriesAreNotEmpty$0$0 in create.mixins.json:BuiltInRegistriesMixin
+[26Apr2025 02:08:34.382] [main/INFO] [mixin/]: Mixing accessor.BuiltInRegistriesAccessor from create.mixins.json into net.minecraft.core.registries.BuiltInRegistries
+[26Apr2025 02:08:34.382] [main/INFO] [mixin/]: Renaming @Accessor method create$getWRITABLE_REGISTRY()Lnet/minecraft/core/WritableRegistry; to create$getWRITABLE_REGISTRY_$md$c22052$1 in create.mixins.json:accessor.BuiltInRegistriesAccessor
+[26Apr2025 02:08:34.510] [main/INFO] [mixin/]: Mixing accessor.StateHolderAccessor from create.mixins.json into net.minecraft.world.level.block.state.StateHolder
+[26Apr2025 02:08:34.537] [main/INFO] [mixin/]: Mixing accessor.EntityAccessor from ponder.mixins.json into net.minecraft.world.entity.Entity
+[26Apr2025 02:08:34.543] [main/INFO] [mixin/]: Mixing client.EntityContraptionInteractionMixin from create.mixins.json into net.minecraft.world.entity.Entity
+[26Apr2025 02:08:34.545] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$onSpawnSprintParticle$4(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;Lcom/simibubi/create/content/contraptions/Contraption;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V to mdc22052$lambda$create$onSpawnSprintParticle$4$0 in create.mixins.json:client.EntityContraptionInteractionMixin
+[26Apr2025 02:08:34.546] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$onMove$3(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/entity/Entity;Lcom/simibubi/create/content/contraptions/AbstractContraptionEntity;)Z to mdc22052$lambda$create$onMove$3$1 in create.mixins.json:client.EntityContraptionInteractionMixin
+[26Apr2025 02:08:34.546] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$contraptionStepSounds$2(Lorg/apache/commons/lang3/mutable/MutableBoolean;Lcom/simibubi/create/content/contraptions/Contraption;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V to mdc22052$lambda$create$contraptionStepSounds$2$2 in create.mixins.json:client.EntityContraptionInteractionMixin
+[26Apr2025 02:08:34.546] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$forCollision$1(Lnet/minecraft/world/phys/Vec3;Lorg/apache/logging/log4j/util/TriConsumer;Lcom/simibubi/create/content/contraptions/AbstractContraptionEntity;)V to mdc22052$lambda$create$forCollision$1$3 in create.mixins.json:client.EntityContraptionInteractionMixin
+[26Apr2025 02:08:34.546] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$getIntersectionContraptionsStream$0(Lcom/simibubi/create/content/contraptions/AbstractContraptionEntity;)Z to mdc22052$lambda$create$getIntersectionContraptionsStream$0$4 in create.mixins.json:client.EntityContraptionInteractionMixin
+[26Apr2025 02:08:34.592] [main/INFO] [mixin/]: Mixing EntityMixin from create.mixins.json into net.minecraft.world.entity.Entity
+[26Apr2025 02:08:34.723] [main/INFO] [mixin/]: Mixing CustomItemUseEffectsMixin from create.mixins.json into net.minecraft.world.entity.LivingEntity
+[26Apr2025 02:08:34.741] [main/INFO] [mixin/]: Mixing LavaSwimmingMixin from create.mixins.json into net.minecraft.world.entity.LivingEntity
+[26Apr2025 02:08:34.750] [main/INFO] [mixin/]: Mixing accessor.LivingEntityAccessor from create.mixins.json into net.minecraft.world.entity.LivingEntity
+[26Apr2025 02:08:34.848] [main/INFO] [mixin/]: Mixing LevelMixin from flywheel.impl.mixins.json into net.minecraft.world.level.Level
+[26Apr2025 02:08:34.862] [main/INFO] [mixin/]: Mixing accessor.ServerLevelAccessor from create.mixins.json into net.minecraft.server.level.ServerLevel
+[26Apr2025 02:08:34.885] [main/INFO] [mixin/]: Mixing PlayerMixin from create.mixins.json into net.minecraft.world.entity.player.Player
+[26Apr2025 02:08:34.955] [main/INFO] [mixin/]: Mixing EntityTypeMixin from flywheel.impl.mixins.json into net.minecraft.world.entity.EntityType
+[26Apr2025 02:08:34.969] [main/INFO] [mixin/]: Mixing BlockEntityTypeMixin from flywheel.impl.mixins.json into net.minecraft.world.level.block.entity.BlockEntityType
+[26Apr2025 02:08:35.151] [main/INFO] [mixin/]: Mixing accessor.DispenserBlockAccessor from create.mixins.json into net.minecraft.world.level.block.DispenserBlock
+[26Apr2025 02:08:35.227] [main/INFO] [mixin/]: Mixing ShulkerBoxBlockMixin from create.mixins.json into net.minecraft.world.level.block.ShulkerBoxBlock
+[26Apr2025 02:08:35.287] [main/INFO] [mixin/]: Mixing WaterWheelFluidSpreadMixin from create.mixins.json into net.minecraft.world.level.material.FlowingFluid
+[26Apr2025 02:08:35.296] [main/INFO] [mixin/]: Mixing accessor.FlowingFluidAccessor from create.mixins.json into net.minecraft.world.level.material.FlowingFluid
+[26Apr2025 02:08:35.357] [main/INFO] [mixin/]: Mixing visualmanage.BlockEntityMixin from flywheel.impl.mixins.json into net.minecraft.world.level.block.entity.BlockEntity
+[26Apr2025 02:08:35.367] [main/INFO] [mixin/]: Mixing accessor.FallingBlockEntityAccessor from create.mixins.json into net.minecraft.world.entity.item.FallingBlockEntity
+[26Apr2025 02:08:35.367] [main/INFO] [mixin/]: Renaming @Invoker method create$callInit(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/entity/item/FallingBlockEntity; to create$callInit_$md$c22052$0 in create.mixins.json:accessor.FallingBlockEntityAccessor
+[26Apr2025 02:08:35.935] [main/INFO] [mixin/]: Mixing SmithingMenuMixin from create.mixins.json into net.minecraft.world.inventory.SmithingMenu
+[26Apr2025 02:08:35.937] [main/INFO] [mixin/]: Renaming synthetic method lambda$create$preventUnbreakingOnBacktanks$0(Lnet/minecraft/world/item/ItemStack;Ljava/util/Map;Lnet/minecraft/world/item/enchantment/Enchantment;Ljava/lang/Integer;)V to mdc22052$lambda$create$preventUnbreakingOnBacktanks$0$0 in create.mixins.json:SmithingMenuMixin
+[26Apr2025 02:08:36.124] [main/INFO] [mixin/]: Mixing BlockItemMixin from create.mixins.json into net.minecraft.world.item.BlockItem
+[26Apr2025 02:08:36.161] [main/INFO] [mixin/]: Mixing accessor.SuspiciousStewItemAccessor from create.mixins.json into net.minecraft.world.item.SuspiciousStewItem
+[26Apr2025 02:08:36.162] [main/INFO] [mixin/]: Renaming @Invoker method create$listPotionEffects(Lnet/minecraft/world/item/ItemStack;Ljava/util/function/Consumer;)V to create$listPotionEffects_$md$c22052$0 in create.mixins.json:accessor.SuspiciousStewItemAccessor
+[26Apr2025 02:08:36.826] [main/INFO] [mixin/]: Mixing accessor.UseOnContextAccessor from create.mixins.json into net.minecraft.world.item.context.UseOnContext
+[26Apr2025 02:08:37.007] [main/INFO] [mixin/]: Mixing visualmanage.LevelChunkMixin from flywheel.impl.mixins.json into net.minecraft.world.level.chunk.LevelChunk
+[26Apr2025 02:08:37.082] [main/INFO] [mixin/]: Mixing accessor.MobEffectInstanceAccessor from create.mixins.json into net.minecraft.world.effect.MobEffectInstance
+[26Apr2025 02:08:37.125] [main/INFO] [mixin/]: Mixing accessor.AbstractProjectileDispenseBehaviorAccessor from create.mixins.json into net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior
+[26Apr2025 02:08:37.249] [main/INFO] [mixin/]: Mixing LootingEnchantFunctionMixin from create.mixins.json into net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction
+[26Apr2025 02:08:37.820] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.4 initializing! Commit hash: 254bb816aee1c056c74b2ad4beb88222a499da78
+[26Apr2025 02:08:37.831] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.0, for MC 1.20.1 with MCP 20230612.114412
+[26Apr2025 02:08:37.832] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.0 Initialized
+[26Apr2025 02:08:37.846] [modloading-worker-0/INFO] [mixin/]: Mixing client.HeavyBootsOnPlayerMixin from create.mixins.json into net.minecraft.client.player.LocalPlayer
+[26Apr2025 02:08:37.860] [modloading-worker-0/INFO] [mixin/]: Mixing OptionsMixin from flywheel.backend.mixins.json into net.minecraft.client.Options
+[26Apr2025 02:08:37.883] [modloading-worker-0/INFO] [mixin/]: Mixing AbstractClientPlayerAccessor from flywheel.backend.mixins.json into net.minecraft.client.player.AbstractClientPlayer
+[26Apr2025 02:08:37.909] [modloading-worker-0/INFO] [mixin/]: Mixing MinecraftMixin from flywheel.impl.mixins.json into net.minecraft.client.Minecraft
+[26Apr2025 02:08:37.914] [modloading-worker-0/INFO] [mixin/]: Mixing client.WindowResizeMixin from ponder.mixins.json into net.minecraft.client.Minecraft
+[26Apr2025 02:08:37.966] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.FontAccessor from create.mixins.json into net.minecraft.client.gui.Font
+[26Apr2025 02:08:37.979] [modloading-worker-0/INFO] [mixin/]: Mixing LevelRendererAccessor from flywheel.backend.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:37.984] [modloading-worker-0/INFO] [mixin/]: Mixing fix.FixFabulousDepthMixin from flywheel.impl.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:37.984] [modloading-worker-0/INFO] [mixin/]: Mixing visualmanage.LevelRendererMixin from flywheel.impl.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:37.985] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.LevelRendererAccessor from create.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:37.995] [modloading-worker-0/INFO] [mixin/]: Mixing client.LevelRendererMixin from create.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:37.996] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$create$onDestroyBlockProgress$0(J)Ljava/util/SortedSet; to mdc22052$lambda$create$onDestroyBlockProgress$0$0 in create.mixins.json:client.LevelRendererMixin
+[26Apr2025 02:08:37.999] [modloading-worker-0/INFO] [mixin/]: Mixing LevelRendererMixin from flywheel.impl.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[26Apr2025 02:08:38.086] [modloading-worker-0/INFO] [mixin/]: Mixing PoseStackAccessor from flywheel.impl.mixins.json into com.mojang.blaze3d.vertex.PoseStack
+[26Apr2025 02:08:38.090] [modloading-worker-0/INFO] [mixin/]: Mixing PoseStackMixin from flywheel.impl.mixins.json into com.mojang.blaze3d.vertex.PoseStack
+[26Apr2025 02:08:38.091] [modloading-worker-0/INFO] [mixin/]: Mixing fix.FixNormalScalingMixin from flywheel.impl.mixins.json into com.mojang.blaze3d.vertex.PoseStack
+[26Apr2025 02:08:38.119] [modloading-worker-0/INFO] [mixin/]: Mixing client.CameraMixin from create.mixins.json into net.minecraft.client.Camera
+[26Apr2025 02:08:38.191] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[26Apr2025 02:08:38.195] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 2.483 ms
+[26Apr2025 02:08:38.204] [modloading-worker-0/INFO] [mixin/]: Mixing client.accessor.RenderTypeAccessor from ponder.mixins.json into net.minecraft.client.renderer.RenderType
+[26Apr2025 02:08:38.205] [modloading-worker-0/INFO] [mixin/]: Renaming @Invoker method catnip$create(Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType; to catnip$create_$md$c22052$0 in ponder.mixins.json:client.accessor.RenderTypeAccessor
+[26Apr2025 02:08:38.218] [modloading-worker-0/INFO] [mixin/]: Mixing client.accessor.GameRendererAccessor from ponder.mixins.json into net.minecraft.client.renderer.GameRenderer
+[26Apr2025 02:08:38.223] [modloading-worker-0/INFO] [mixin/]: Mixing client.GameRendererMixin from create.mixins.json into net.minecraft.client.renderer.GameRenderer
+[26Apr2025 02:08:38.749] [modloading-worker-0/INFO] [mixin/]: Mixing BlockBreakingKineticBlockEntityMixin from mixins.flat_pack_tweaks.json into com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity
+[26Apr2025 02:08:38.920] [modloading-worker-0/INFO] [mixin/]: Mixing client.accessor.ParticleEngineAccessor from ponder.mixins.json into net.minecraft.client.particle.ParticleEngine
+[26Apr2025 02:08:39.027] [modloading-worker-0/INFO] [mixin/]: Mixing client.PlayerRendererMixin from create.mixins.json into net.minecraft.client.renderer.entity.player.PlayerRenderer
+[26Apr2025 02:08:39.744] [main/INFO] [mixin/]: Mixing client.HumanoidModelMixin from create.mixins.json into net.minecraft.client.model.HumanoidModel
+[26Apr2025 02:08:39.752] [main/INFO] [mixin/]: Mixing accessor.AgeableListModelAccessor from create.mixins.json into net.minecraft.client.model.AgeableListModel
+[26Apr2025 02:08:39.769] [main/INFO] [mixin/]: Mixing accessor.ItemModelGeneratorsAccessor from create.mixins.json into net.minecraft.data.models.ItemModelGenerators
+[26Apr2025 02:08:39.769] [main/INFO] [mixin/]: Renaming @Accessor method create$getGENERATED_TRIM_MODELS()Ljava/util/List; to create$getGENERATED_TRIM_MODELS_$md$c22052$0 in create.mixins.json:accessor.ItemModelGeneratorsAccessor
+[26Apr2025 02:08:39.952] [Worker-Main-1/INFO] [mixin/]: Mixing MapItemSavedDataMixin from create.mixins.json into net.minecraft.world.level.saveddata.maps.MapItemSavedData
+[26Apr2025 02:08:39.988] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/mainy/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23181!/assets/.mcassetsroot' uses unexpected schema
+[26Apr2025 02:08:39.988] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/home/mainy/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.0_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23181!/data/.mcassetsroot' uses unexpected schema
+[26Apr2025 02:08:40.158] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registrate Provider for flat_pack_tweaks [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+[26Apr2025 02:08:40.228] [main/INFO] [net.minecraft.data.DataGenerator/]: Registrate Provider for flat_pack_tweaks [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)] finished after 70 ms
+[26Apr2025 02:08:40.228] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 71 ms
+[26Apr2025 02:08:40.231] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 2, old count: 0, new count: 3, removed stale: 0, written: 2
