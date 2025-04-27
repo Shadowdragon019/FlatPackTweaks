@@ -43,7 +43,7 @@ abstract class BlockBreakingKineticBlockEntityMixin extends KineticBlockEntity {
 	@Inject(method = "tick",
 		remap = false,
 		at = @At("HEAD"))
-	private void flat_pack_tweaks$tick_Inject(CallbackInfo ci) {
+	private void fpt$tick$Inject(CallbackInfo ci) {
 		if ((BlockBreakingKineticBlockEntity) (Object) this instanceof DrillBlockEntity) {
 			if (level.isClientSide || getSpeed() == 0 || !shouldRun() || level == null || breakingPos == null)
 				return;
@@ -76,7 +76,9 @@ abstract class BlockBreakingKineticBlockEntityMixin extends KineticBlockEntity {
 	@ModifyReturnValue(method = "canBreak",
 		remap = false,
 		at = @At("RETURN"))
-	private boolean flat_pack_tweaks$canBreak_ModifyReturnValue(boolean original, @Local(argsOnly = true) BlockState state_to_break) {
+	private boolean fpt$canBreak$ModifyReturnValue(boolean original,
+		@Local(argsOnly = true) BlockState state_to_break
+	) {
 		if ((BlockBreakingKineticBlockEntity) (Object) this instanceof DrillBlockEntity)
 			return original && !FptConfig.can_infini_drill(state_to_break.getBlock());
 		else return original;

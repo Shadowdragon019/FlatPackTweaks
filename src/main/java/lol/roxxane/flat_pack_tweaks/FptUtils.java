@@ -4,12 +4,14 @@ import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.toml.TomlFormat;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class FptUtils {
 	@SuppressWarnings("unchecked")
-	public static <K, V> HashMap<K, V> new_hash_map(Object... objects) {
+	public static <K, V> HashMap<K, V> mutable_map(Object... objects) {
 		var hashmap = new HashMap<K, V>();
 		Object key = null;
 		var is_key = true;
@@ -20,12 +22,17 @@ public class FptUtils {
 		return hashmap;
 	}
 
+	@SafeVarargs
+	public static <T> ArrayList<T> mutable_list(T... elements) {
+		return new ArrayList<>(List.of(elements));
+	}
+
 	public static CommentedConfig new_config(HashMap<String, Object> map) {
 		return TomlFormat.newConfig(() -> map);
 	}
 
 	public static CommentedConfig new_config(Object... objects) {
-		return TomlFormat.newConfig(() -> new_hash_map(objects));
+		return TomlFormat.newConfig(() -> mutable_map(objects));
 	}
 
 	public static String resource_recipe_string(ResourceLocation resource) {

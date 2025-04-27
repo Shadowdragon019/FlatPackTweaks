@@ -3,11 +3,13 @@ package lol.roxxane.flat_pack_tweaks.config;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
 import com.google.common.collect.ImmutableMap;
+import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.FptUtils;
 import lol.roxxane.flat_pack_tweaks.jei.InfiniDrillingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,7 +39,6 @@ public class FptConfig {
             }
             return false;
         });
-
     public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES =
         BUILDER.define("remove_toolbox_recipes", true);
     public static final ForgeConfigSpec.BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
@@ -46,22 +47,25 @@ public class FptConfig {
         BUILDER.define("all_items_are_fireproof", true);
     public static final ForgeConfigSpec.IntValue HAND_CRANK_ROTATION_SPEED =
         BUILDER.defineInRange("hand_crank_rotation_speed", 32, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-    private static final HashMap<Block, Item> INFINI_DRILLING_MAP = new HashMap<>();
+    private static final ForgeConfigSpec.ConfigValue<String> SUPERGLUE_VALUE =
+        BUILDER.define("superglue", "create:super_glue", FptConfig::item_exists);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
+
+    private static final HashMap<Block, Item> INFINI_DRILLING_MAP = new HashMap<>();
+    private static Item superglue = Items.AIR;
 
     private static Item get_item(String string) {
         return ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(string));
     }
-    private static boolean item_exists(String string) {
-        return ForgeRegistries.ITEMS.containsKey(ResourceLocation.parse(string));
+    private static boolean item_exists(Object object) {
+        return object instanceof String string && ForgeRegistries.ITEMS.containsKey(ResourceLocation.parse(string));
     }
     private static Block get_block(String string) {
         return ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(string));
     }
-    private static boolean blocks_exists(String string) {
-        return ForgeRegistries.BLOCKS.containsKey(ResourceLocation.parse(string));
+    private static boolean blocks_exists(Object object) {
+        return object instanceof String string && ForgeRegistries.BLOCKS.containsKey(ResourceLocation.parse(string));
     }
 
     @SubscribeEvent
@@ -71,10 +75,12 @@ public class FptConfig {
         if (SPEC.isLoaded()) {
             INFINI_DRILLING_MAP_VALUE.get().valueMap().forEach((key, value) ->
                 INFINI_DRILLING_MAP.put(get_block(key), get_item((String) value)));
+            superglue = get_item(SUPERGLUE_VALUE.get());
         }
     }
 
-    // INFINI DRILLING
+    // Infini-Drilling
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean can_infini_drill(Block block) {
         return INFINI_DRILLING_MAP.containsKey(block);
     }
@@ -92,5 +98,18 @@ public class FptConfig {
             (list, entry) -> list.add(new InfiniDrillingRecipe(entry.getKey(), entry.getValue())),
             // I don't really get what's going on here
 	        ArrayList::addAll);
+    }
+
+    // Superglues
+    public static Item get_superglue() {
+        return superglue;
+    }
+    public static boolean is_superglue(Item item) {
+        return get_superglue() == item;
+    }
+    public static Item is_superglue_return_item(Item item) {
+        if (FptConfig.is_superglue(item))
+            return AllItems.SUPER_GLUE.get(); // success
+        else return Items.AIR; // failure
     }
 }

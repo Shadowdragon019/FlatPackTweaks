@@ -11,7 +11,7 @@ abstract class HandCrankBlockMixin {
 	@ModifyReturnValue(method = "getRotationSpeed",
 		remap = false,
 		at = @At("RETURN"))
-	private int flat_pack_tweaker$getRotationSpeed$ModifyReturnValue(int original) {
+	private int fpt$getRotationSpeed$ModifyReturnValue(int original) {
 		return FptConfig.HAND_CRANK_ROTATION_SPEED.get();
 	}
 }

@@ -11,6 +11,12 @@
 		"create.CreateJeiMixin",
 		"create.HandCrankBlockMixin",
 		"create.WrenchItemMixin",
+		"create.more_superglues.AbstractChassisBlockMixin",
+		"create.more_superglues.SuperGlueEntityMixin",
+		"create.more_superglues.SuperGlueHandlerMixin",
+		"create.more_superglues.SuperGlueItemMixin",
+		"create.more_superglues.SuperGlueSelectionHandlerMixin",
+		"create.more_superglues.SuperGlueSelectionHelperMixin",
 		"jei.VanillaPluginMixin",
 		"minecraft.ItemMixin"
 	]

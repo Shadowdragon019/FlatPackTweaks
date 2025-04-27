@@ -12,7 +12,7 @@ abstract class ItemMixin {
 	@Inject(method = "isFireResistant",
 		cancellable = true,
 		at = @At("RETURN"))
-	private void flat_pack_tweaks$isFireResistant_Inject(CallbackInfoReturnable<Boolean> cir) {
+	private void fpt$isFireResistant$Inject(CallbackInfoReturnable<Boolean> cir) {
 		if (FptConfig.ALL_ITEMS_ARE_FIREPROOF.get())
 			cir.setReturnValue(true);
 	}

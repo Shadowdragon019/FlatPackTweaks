@@ -18,5 +18,6 @@ abstract class VanillaPluginMixin {
 		remap = false,
 		at = @At(value = "INVOKE", ordinal = 0,
 			target = "Lmezz/jei/api/registration/IRecipeCatalystRegistration;addRecipeCatalysts(Lmezz/jei/api/recipe/RecipeType;[Lnet/minecraft/world/level/ItemLike;)V"))
-	private void flat_pack_tweaks$registerRecipeCatalysts_Redirect(IRecipeCatalystRegistration instance, RecipeType<?> recipeType, ItemLike[] itemLikes) {}
+	private void fpt$registerRecipeCatalysts$Redirect(IRecipeCatalystRegistration instance, RecipeType<?> recipeType,
+		ItemLike[] itemLikes) {}
 }

@@ -13,7 +13,7 @@ abstract class CreateJeiMixin {
 	@ModifyExpressionValue(method = "registerRecipes",
 		remap = false,
 		at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;toList()Ljava/util/List;"))
-	private List<Object> flat_pack_tweaks$registerRecipes_ModifyExpressionValue(List<Object> original) {
+	private List<Object> fpt$registerRecipes$ModifyExpressionValue(List<Object> original) {
 		if (FptConfig.REMOVE_TOOLBOX_RECIPES.get())
 			return List.of();
 		else return original;

@@ -23,6 +23,6 @@ public class Fpt {
         context.registerConfig(ModConfig.Type.SERVER, FptConfig.SPEC);
 
         // Lang
-        registrate.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini Drilling");
+        registrate.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
     }
 }
