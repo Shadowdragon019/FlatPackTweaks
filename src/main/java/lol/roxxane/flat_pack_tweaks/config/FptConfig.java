@@ -40,12 +40,12 @@ public class FptConfig {
 
     public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES =
         BUILDER.define("remove_toolbox_recipes", true);
-
     public static final ForgeConfigSpec.BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
         BUILDER.define("wrench_can_pickup_anything_destructible", true);
-
     public static final ForgeConfigSpec.BooleanValue ALL_ITEMS_ARE_FIREPROOF =
         BUILDER.define("all_items_are_fireproof", true);
+    public static final ForgeConfigSpec.IntValue HAND_CRANK_ROTATION_SPEED =
+        BUILDER.defineInRange("hand_crank_rotation_speed", 32, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
     private static final HashMap<Block, Item> INFINI_DRILLING_MAP = new HashMap<>();
 

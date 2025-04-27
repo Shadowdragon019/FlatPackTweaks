@@ -18,9 +18,6 @@ public class Fpt {
     public static ResourceLocation resource(String path) {
         return ResourceLocation.fromNamespaceAndPath(ID, path);
     }
-    public static ResourceLocation texture_resource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(ID, "textures/" + path);
-    }
 
     public Fpt(FMLJavaModLoadingContext context) {
         context.registerConfig(ModConfig.Type.SERVER, FptConfig.SPEC);

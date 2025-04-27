@@ -9,6 +9,7 @@
 	"mixins": [
 		"create.BlockBreakingKineticBlockEntityMixin",
 		"create.CreateJeiMixin",
+		"create.HandCrankBlockMixin",
 		"create.WrenchItemMixin",
 		"jei.VanillaPluginMixin",
 		"minecraft.ItemMixin"

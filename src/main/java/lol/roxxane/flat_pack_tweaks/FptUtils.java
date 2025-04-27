@@ -2,6 +2,7 @@ package lol.roxxane.flat_pack_tweaks;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.toml.TomlFormat;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
 
@@ -25,5 +26,9 @@ public class FptUtils {
 
 	public static CommentedConfig new_config(Object... objects) {
 		return TomlFormat.newConfig(() -> new_hash_map(objects));
+	}
+
+	public static String resource_recipe_string(ResourceLocation resource) {
+		return resource.getNamespace() + "_" + resource.getPath();
 	}
 }
