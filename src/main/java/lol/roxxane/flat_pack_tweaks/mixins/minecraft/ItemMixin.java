@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins;
+package lol.roxxane.flat_pack_tweaks.mixins.minecraft;
 
 import lol.roxxane.flat_pack_tweaks.config.FptConfig;
 import net.minecraft.world.item.Item;

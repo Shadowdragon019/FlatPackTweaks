@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins;
+package lol.roxxane.flat_pack_tweaks.mixins.create;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.compat.jei.CreateJEI;
