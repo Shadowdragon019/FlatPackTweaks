@@ -1,18 +1,20 @@
 package lol.roxxane.flat_pack_tweaks.mixins.create.more_superglues;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.contraptions.glue.SuperGlueEntity;
+import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import lol.roxxane.flat_pack_tweaks.config.FptConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(SuperGlueEntity.class)
 abstract class SuperGlueEntityMixin {
-	@ModifyExpressionValue(method = "getRequiredItems",
+	@ModifyReturnValue(method = "getRequiredItems",
 		remap = false,
-		at = @At(value = "INVOKE",
-			target = "Lcom/tterrag/registrate/util/entry/ItemEntry;get()Ljava/lang/Object;"))
-	private Object fpt$getRequiredItems$ModifyExpressionValue(Object original) {
-		return FptConfig.get_superglue();
+		at = @At("RETURN"))
+	private ItemRequirement fpt$getRequiredItems$ModifyReturnValue(ItemRequirement original) {
+		return new ItemRequirement(FptConfig.get_superglue().canBeDepleted() ?
+			ItemRequirement.ItemUseType.DAMAGE : ItemRequirement.ItemUseType.CONSUME,
+			FptConfig.get_superglue());
 	}
 }

@@ -9,7 +9,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// TODO: Fix non-create-superglue being able to break blocks
 @Mod(Fpt.ID)
 public class Fpt {
     public static final String ID = "flat_pack_tweaks";
