@@ -178,7 +178,7 @@ dependencies {
     //compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.19.0.85")
     //compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.19.0.85")
     // at runtime, use the full JEI jar for Forge
-    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.19.0.85")
+    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.106")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
