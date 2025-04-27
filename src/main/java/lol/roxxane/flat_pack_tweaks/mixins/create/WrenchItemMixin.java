@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 abstract class WrenchItemMixin {
 	@ModifyExpressionValue(method = "useOn", at = @At(value = "INVOKE", remap = false,
 		target = "Lcom/simibubi/create/content/equipment/wrench/WrenchItem;canWrenchPickup(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
-	private boolean useOn_ModifyExpressionValue(boolean original, @Local() BlockState state,
+	private boolean flat_pack_tweaks$useOn_ModifyExpressionValue(boolean original, @Local() BlockState state,
 		@Local(argsOnly = true) UseOnContext context
 	) {
 		if (FptConfig.WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE.get())
