@@ -39,6 +39,9 @@ public class FptConfig {
             }
             return false;
         });
+    private static final ForgeConfigSpec.ConfigValue<String> SUPERGLUE_VALUE =
+        BUILDER.define("superglue", "create:super_glue", FptConfig::item_exists);
+
     public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES =
         BUILDER.define("remove_toolbox_recipes", true);
     public static final ForgeConfigSpec.BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
@@ -47,8 +50,9 @@ public class FptConfig {
         BUILDER.define("all_items_are_fireproof", true);
     public static final ForgeConfigSpec.IntValue HAND_CRANK_ROTATION_SPEED =
         BUILDER.defineInRange("hand_crank_rotation_speed", 32, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    private static final ForgeConfigSpec.ConfigValue<String> SUPERGLUE_VALUE =
-        BUILDER.define("superglue", "create:super_glue", FptConfig::item_exists);
+    public static final ForgeConfigSpec.DoubleValue WATER_WHEEL_SPEED_FACTOR =
+        BUILDER.comment("By default water wheels have 8 speed & large water wheels have 4 speed")
+            .defineInRange("water_wheel_speed_factor", 1, 0, Double.MAX_VALUE);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 

@@ -10,6 +10,7 @@
 		"create.BlockBreakingKineticBlockEntityMixin",
 		"create.CreateJeiMixin",
 		"create.HandCrankBlockMixin",
+		"create.WaterWheelBlockEntityMixin",
 		"create.WrenchItemMixin",
 		"create.more_superglues.AbstractChassisBlockMixin",
 		"create.more_superglues.ItemMixin",
