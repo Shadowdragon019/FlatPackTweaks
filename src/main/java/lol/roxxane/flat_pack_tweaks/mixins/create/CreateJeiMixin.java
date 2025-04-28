@@ -14,7 +14,7 @@ abstract class CreateJeiMixin {
 		remap = false,
 		at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;toList()Ljava/util/List;"))
 	private List<Object> fpt$registerRecipes$ModifyExpressionValue(List<Object> original) {
-		if (FptConfig.REMOVE_TOOLBOX_RECIPES.get())
+		if (FptConfig.REMOVE_TOOLBOX_RECIPES_FROM_JEI.get())
 			return List.of();
 		else return original;
 	}

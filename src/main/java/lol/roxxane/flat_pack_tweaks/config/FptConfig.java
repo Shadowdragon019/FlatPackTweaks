@@ -42,8 +42,8 @@ public class FptConfig {
     private static final ForgeConfigSpec.ConfigValue<String> SUPERGLUE_VALUE =
         BUILDER.define("superglue", "create:super_glue", FptConfig::item_exists);
 
-    public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES =
-        BUILDER.define("remove_toolbox_recipes", true);
+    public static final ForgeConfigSpec.BooleanValue REMOVE_TOOLBOX_RECIPES_FROM_JEI =
+        BUILDER.define("remove_toolbox_recipes_from_jei", true);
     public static final ForgeConfigSpec.BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
         BUILDER.define("wrench_can_pickup_anything_destructible", true);
     public static final ForgeConfigSpec.BooleanValue ALL_ITEMS_ARE_FIREPROOF =
