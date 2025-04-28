@@ -12,7 +12,6 @@
 		"create.HandCrankBlockMixin",
 		"create.WaterWheelBlockEntityMixin",
 		"create.WrenchItemMixin",
-		"create.lychee_fast_item_inside.EntityMixinMixin",
 		"create.more_superglues.AbstractChassisBlockMixin",
 		"create.more_superglues.ItemMixin",
 		"create.more_superglues.SuperGlueEntityMixin",
