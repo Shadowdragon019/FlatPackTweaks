@@ -1,6 +1,7 @@
 package lol.roxxane.flat_pack_tweaks;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import com.tterrag.registrate.Registrate;
 import lol.roxxane.flat_pack_tweaks.config.FptConfig;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +22,8 @@ public class Fpt {
 
     public Fpt(FMLJavaModLoadingContext context) {
         context.registerConfig(ModConfig.Type.SERVER, FptConfig.SPEC);
+
+        GogglesItem.addIsWearingPredicate($ -> true);
 
         // Lang
         registrate.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
