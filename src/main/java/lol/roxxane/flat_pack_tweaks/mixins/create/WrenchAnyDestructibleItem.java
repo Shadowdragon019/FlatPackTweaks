@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(WrenchItem.class)
-abstract class WrenchItemMixin {
+abstract class WrenchAnyDestructibleItem {
 	@ModifyExpressionValue(method = "useOn", at = @At(value = "INVOKE", remap = false,
 		target = "Lcom/simibubi/create/content/equipment/wrench/WrenchItem;canWrenchPickup(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
 	private boolean fpt$useOn$ModifyExpressionValue(boolean original, @Local() BlockState state,

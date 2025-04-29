@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins.create.more_superglues;
+package lol.roxxane.flat_pack_tweaks.mixins.create.change_what_functions_as_super_glue;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(SuperGlueHandler.class)
-abstract class SuperGlueHandlerMixin {
+abstract class PlaceWhenInOffHand {
 	@ModifyExpressionValue(method = "glueInOffHandAppliesOnBlockPlace",
 		remap = false,
 		at = @At(value = "INVOKE", ordinal = 0,

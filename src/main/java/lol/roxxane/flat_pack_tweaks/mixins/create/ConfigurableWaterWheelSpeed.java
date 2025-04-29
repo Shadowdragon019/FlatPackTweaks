@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(WaterWheelBlockEntity.class)
-abstract class WaterWheelBlockEntityMixin {
+abstract class ConfigurableWaterWheelSpeed {
 	@ModifyReturnValue(method = "getGeneratedSpeed",
 		remap = false,
 		at = @At("RETURN"))

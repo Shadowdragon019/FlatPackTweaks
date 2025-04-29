@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
-abstract class ItemMixin {
+abstract class ItemsAreAlwaysFireproof {
 	@Inject(method = "isFireResistant",
 		cancellable = true,
 		at = @At("RETURN"))

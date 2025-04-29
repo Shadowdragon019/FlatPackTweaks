@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(VanillaPlugin.class)
-abstract class VanillaPluginMixin {
+abstract class RemoveCraftingTableAsCatalyst {
 	// Remove the crafting table as a catalyst from the crafting category
 	// This is done as when an item that a catalyst represents is hidden,
 	//   the category that the catalyst corresponds to disappears also,

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.List;
 
 @Mixin(CreateJEI.class)
-abstract class CreateJeiMixin {
+abstract class RemoveToolboxRecipesFromJei {
 	@ModifyExpressionValue(method = "registerRecipes",
 		remap = false,
 		at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;toList()Ljava/util/List;"))

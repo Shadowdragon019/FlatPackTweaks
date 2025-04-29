@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins.create.more_superglues;
+package lol.roxxane.flat_pack_tweaks.mixins.create.change_what_functions_as_super_glue;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractChassisBlock.class)
-abstract class AbstractChassisBlockMixin {
+abstract class MakeChassisSticky {
 	@ModifyExpressionValue(method = "use",
 		at = @At(value = "INVOKE", remap = false,
 			target = "Lcom/tterrag/registrate/util/entry/ItemEntry;isIn(Lnet/minecraft/world/item/ItemStack;)Z"))

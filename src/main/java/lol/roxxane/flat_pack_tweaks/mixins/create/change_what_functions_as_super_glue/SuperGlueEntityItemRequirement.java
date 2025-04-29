@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins.create.more_superglues;
+package lol.roxxane.flat_pack_tweaks.mixins.create.change_what_functions_as_super_glue;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.contraptions.glue.SuperGlueEntity;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(SuperGlueEntity.class)
-abstract class SuperGlueEntityMixin {
+abstract class SuperGlueEntityItemRequirement {
 	@ModifyReturnValue(method = "getRequiredItems",
 		remap = false,
 		at = @At("RETURN"))

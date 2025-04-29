@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BlockBreakingKineticBlockEntity.class)
-abstract class BlockBreakingKineticBlockEntityMixin extends KineticBlockEntity {
+abstract class InfiniDrilling extends KineticBlockEntity {
 	@Unique
 	int fct$ore_drop_timer = 0;
 
@@ -33,13 +33,13 @@ abstract class BlockBreakingKineticBlockEntityMixin extends KineticBlockEntity {
 
 	@Shadow(remap = false) protected int breakerId;
 
-	public BlockBreakingKineticBlockEntityMixin(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+	public InfiniDrilling(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
 		super(typeIn, pos, state);
 	}
 
-	//this is weirdly but not noticeably buggy because I can't *remove* progress (no, setting one to -1 doesn't fix the bugs)
-	//to see what i mean, place an ore, place a drill & make it mine the ore, remove the power, then rotate the drill with a wrench or replace the block with any other (don't power it again)
-	//MC eventually removes all (presumably inactive) block breaking progresses after a while
+	// this is weirdly but not noticeably buggy because I can't *remove* progress (no, setting one to -1 doesn't fix the bugs)
+	// to see what i mean, place an ore, place a drill & make it mine the ore, remove the power, then rotate the drill with a wrench or replace the block with any other (don't power it again)
+	// MC eventually removes all (presumably inactive) block breaking progresses after a while
 	@Inject(method = "tick",
 		remap = false,
 		at = @At("HEAD"))

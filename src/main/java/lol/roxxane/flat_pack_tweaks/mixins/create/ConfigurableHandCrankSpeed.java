@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HandCrankBlock.class)
-abstract class HandCrankBlockMixin {
+abstract class ConfigurableHandCrankSpeed {
 	@ModifyReturnValue(method = "getRotationSpeed",
 		remap = false,
 		at = @At("RETURN"))
