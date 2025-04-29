@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.mixins.remove_builder_mode;
+package lol.roxxane.flat_pack_tweaks.mixins.lychee.remove_builder_mode;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

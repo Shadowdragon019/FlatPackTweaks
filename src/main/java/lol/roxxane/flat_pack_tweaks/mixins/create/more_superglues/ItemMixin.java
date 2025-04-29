@@ -13,6 +13,6 @@ abstract class ItemMixin {
 	@ModifyReturnValue(method = "canAttackBlock",
 		at = @At("RETURN"))
 	private boolean fpt$canAttackBlock$ModifyReturnValue(boolean original) {
-		return !FptConfig.is_superglue((Item) (Object) this) && original;
+		return FptConfig.SUPER_GLUE.get() != (Object) this && original;
 	}
 }

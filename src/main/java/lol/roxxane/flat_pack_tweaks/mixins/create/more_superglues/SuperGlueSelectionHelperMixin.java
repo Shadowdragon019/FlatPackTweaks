@@ -26,7 +26,7 @@ abstract class SuperGlueSelectionHelperMixin {
 	private static void fpt$collectGlueFromInventory$Inject(Player $, int $1, boolean $2,
 		CallbackInfoReturnable<Boolean> cir
 	) {
-		if (!FptConfig.get_superglue().canBeDepleted())
+		if (!FptConfig.SUPER_GLUE.get().canBeDepleted())
 			cir.setReturnValue(true);
 	}
 }

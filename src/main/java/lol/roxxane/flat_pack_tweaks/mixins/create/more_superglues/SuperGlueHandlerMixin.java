@@ -17,6 +17,6 @@ abstract class SuperGlueHandlerMixin {
 	private static boolean fpt$glueInOffHandAppliesOnBlockPlace$ModifyExpressionValue(boolean original,
 		@Local ItemStack stack
 	) {
-		return FptConfig.is_superglue(stack.getItem());
+		return FptConfig.SUPER_GLUE.get() == stack.getItem();
 	}
 }

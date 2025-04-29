@@ -16,6 +16,6 @@ abstract class SuperGlueSelectionHandlerMixin {
 	private boolean fpt$isGlue$ModifyReturnValue(boolean original,
 		@Local(argsOnly = true) ItemStack stack
 	) {
-		return FptConfig.is_superglue(stack.getItem());
+		return FptConfig.SUPER_GLUE.get() == stack.getItem();
 	}
 }

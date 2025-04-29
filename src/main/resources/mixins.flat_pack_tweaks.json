@@ -20,7 +20,7 @@
 		"create.more_superglues.SuperGlueSelectionHandlerMixin",
 		"create.more_superglues.SuperGlueSelectionHelperMixin",
 		"jei.VanillaPluginMixin",
-		"minecraft.ItemMixin",
-		"remove_builder_mode.BuildersButtonMixin"
+		"lychee.remove_builder_mode.BuildersButtonMixin",
+		"minecraft.ItemMixin"
 	]
 }

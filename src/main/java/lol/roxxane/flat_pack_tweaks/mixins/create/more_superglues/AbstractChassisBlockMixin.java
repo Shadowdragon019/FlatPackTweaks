@@ -14,6 +14,6 @@ abstract class AbstractChassisBlockMixin {
 		at = @At(value = "INVOKE", remap = false,
 			target = "Lcom/tterrag/registrate/util/entry/ItemEntry;isIn(Lnet/minecraft/world/item/ItemStack;)Z"))
 	private boolean fpt$use$ModifyExpressionValue(boolean value, @Local ItemStack stack) {
-		return FptConfig.is_superglue(stack.getItem());
+		return FptConfig.SUPER_GLUE.get() == stack.getItem();
 	}
 }

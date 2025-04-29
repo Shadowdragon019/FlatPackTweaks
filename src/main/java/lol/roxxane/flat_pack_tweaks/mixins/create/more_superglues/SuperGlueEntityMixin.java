@@ -13,8 +13,8 @@ abstract class SuperGlueEntityMixin {
 		remap = false,
 		at = @At("RETURN"))
 	private ItemRequirement fpt$getRequiredItems$ModifyReturnValue(ItemRequirement original) {
-		return new ItemRequirement(FptConfig.get_superglue().canBeDepleted() ?
+		return new ItemRequirement(FptConfig.SUPER_GLUE.get().canBeDepleted() ?
 			ItemRequirement.ItemUseType.DAMAGE : ItemRequirement.ItemUseType.CONSUME,
-			FptConfig.get_superglue());
+			FptConfig.SUPER_GLUE.get());
 	}
 }
