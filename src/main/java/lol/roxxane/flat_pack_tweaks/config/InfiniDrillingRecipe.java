@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.jei;
+package lol.roxxane.flat_pack_tweaks.config;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

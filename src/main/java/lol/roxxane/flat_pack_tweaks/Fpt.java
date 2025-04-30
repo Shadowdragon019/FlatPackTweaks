@@ -7,6 +7,7 @@ import com.tterrag.registrate.Registrate;
 import lol.roxxane.flat_pack_tweaks.config.FptConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,8 +15,12 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import static lol.roxxane.flat_pack_tweaks.config.FptConfig.ITEM_IN_FLUID_RECIPES;
+import static lol.roxxane.flat_pack_tweaks.config.FptConfig.ITEM_TRANSFORMATION_PERIOD;
+
 @Mod(Fpt.ID)
 public class Fpt {
+	public static final boolean DEBUG = false;
 	public static final String ID = "flat_pack_tweaks";
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final Registrate REGISTRATE = Registrate.create(ID);
@@ -33,7 +38,7 @@ public class Fpt {
 			if (event.level instanceof ServerLevelAccessor level && !event.level.isClientSide)
 				level.create$getEntityTickList().forEach(entity -> {
 					if (entity.isAlive() && entity instanceof ItemEntity item_entity)
-						item_transformation(item_entity);
+						item_in_fluid_transformation(item_entity);
 				});
 		});
 		
@@ -41,7 +46,16 @@ public class Fpt {
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
 	}
 
-	public void item_transformation(ItemEntity item_entity) {
+	public static void debug(Object o) {
+		if (DEBUG)
+			LOGGER.debug(o.toString());
+	}
+
+	public static void log(Object o) {
+		LOGGER.info(o.toString());
+	}
+
+	private void item_in_fluid_transformation(ItemEntity item_entity) {
 		var level = item_entity.level();
 		var position = item_entity.position();
 		var block_position = item_entity.blockPosition();
@@ -50,16 +64,15 @@ public class Fpt {
 		var stack_count = stack.getCount();
 		var delta = item_entity.getDeltaMovement();
 
-
-
-		/*
-		if (fluid_state.is(Fluids.WATER) && stack.is(Items.RAW_IRON) &&
-			item_entity.tickCount % FptConfig.ITEM_TRANSFORMATION_PERIOD.get() == 0
-		) {
-			item_entity.setItem(stack.copyWithCount(stack_count - 1));
-			level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z,
-				Items.DIRT.getDefaultInstance(), delta.x, delta.y, delta.z));
-			level.setBlock(block_position, Blocks.AIR.defaultBlockState(), 1 | 2);
-		}*/
+		for (var recipe : ITEM_IN_FLUID_RECIPES.get()) {
+			if (fluid_state.is(recipe.fluid()) && stack.is(recipe.item_input()) &&
+				item_entity.tickCount % ITEM_TRANSFORMATION_PERIOD.get() == 0
+			) {
+				item_entity.setItem(stack.copyWithCount(stack_count - 1));
+				level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z,
+					recipe.item_output().getDefaultInstance(), delta.x, delta.y, delta.z));
+				level.setBlock(block_position, Blocks.AIR.defaultBlockState(), 1 | 2);
+			}
+		}
 	}
 }

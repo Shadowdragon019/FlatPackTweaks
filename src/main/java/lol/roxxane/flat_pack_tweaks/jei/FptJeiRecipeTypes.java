@@ -1,6 +1,7 @@
 package lol.roxxane.flat_pack_tweaks.jei;
 
 import lol.roxxane.flat_pack_tweaks.Fpt;
+import lol.roxxane.flat_pack_tweaks.config.InfiniDrillingRecipe;
 import mezz.jei.api.recipe.RecipeType;
 
 public class FptJeiRecipeTypes {

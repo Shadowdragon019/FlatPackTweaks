@@ -1,9 +1,11 @@
 package lol.roxxane.flat_pack_tweaks.config;
 
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
+import lol.roxxane.flat_pack_tweaks.Fpt;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -19,11 +21,18 @@ import java.util.function.Predicate;
 @SuppressWarnings("unused")
 public class FptConfigUtil {
 	// Validators
-	public static boolean validate_map(Object object, Predicate<Map<String, Object>> predicate) {
-		return object instanceof UnmodifiableConfig config && predicate.test(config.valueMap());
+	@SuppressWarnings("unchecked")
+	// TODO: Give information in console
+	public static boolean validate_map(Object o, Predicate<Map<String, Object>> predicate) {
+		if (o instanceof UnmodifiableConfig config) return predicate.test(config.valueMap());
+		else if (o instanceof Map<?,?> map) return predicate.test((Map<String, Object>) map);
+		else {
+			Fpt.log("Object was not map, was " + o.getClass());
+			return false;
+		}
 	}
-	public static boolean validate_entries(Object object, BiPredicate<String, Object> predicate) {
-		return validate_map(object, map -> {
+	public static boolean validate_entries(Object o, BiPredicate<String, Object> predicate) {
+		return validate_map(o, map -> {
 			for (var entry : map.entrySet()) {
 				var key = entry.getKey();
 				var value = entry.getValue();
@@ -33,50 +42,109 @@ public class FptConfigUtil {
 			return true;
 		});
 	}
-	public static boolean validate_string(Object object, Predicate<String> predicate) {
-		return object instanceof String string && predicate.test(string);
+	@SuppressWarnings("unchecked")
+	public static boolean validate_list(Object o, Predicate<List<Object>> predicate) {
+		if (o instanceof List<?> list) return predicate.test((List<Object>) list);
+		else {
+			Fpt.log("Object was not list, was " + o.getClass());
+			return false;
+		}
+	}
+	public static boolean validate_elements(Object o, Predicate<Object> predicate) {
+		return validate_list(o, list -> {
+			for (var element : list)
+				if (!predicate.test(element))
+					return false;
+			return true;
+		});
+	}
+	public static boolean validate_string(Object o, Predicate<String> predicate) {
+		return o instanceof String string && predicate.test(string);
+	}
+	public static boolean validate_required_entry(Object o, String key, Predicate<Object> predicate) {
+		var result = validate_map(o, map -> map.containsKey(key) && predicate.test(map.get(key)));
+		if (!result)
+			Fpt.log("Key \"" + key + "\" failed");
+		return result;
+	}
+	public static boolean validate_required_entries(Object o, EntryPredicate... pairs) {
+		return validate_map(o, map -> {
+			for (var pair : pairs)
+				if (!validate_required_entry(map, pair.key(), pair.predicate()))
+					return false;
+			return true;
+		});
+	}
+	public static boolean validate_optional_entry(Object o, String key, Predicate<Object> predicate) {
+		return validate_map(o, map -> {
+			if (map.containsKey(key))
+				return predicate.test(map.get(key));
+			else return true;
+		});
+	}
+	public static boolean validate_optional_entries(Object o, EntryPredicate... pairs) {
+		return validate_map(o, map -> {
+			for (var pair : pairs)
+				if (!validate_optional_entry(map, pair.key(), pair.predicate()))
+					return false;
+			return true;
+		});
 	}
 
 	// Parsers
-	public static <T> T parse_map(Object object, Function<Map<String, Object>, T> func) {
-		if (object instanceof UnmodifiableConfig config) {
-			return func.apply(config.valueMap());
-		} else throw new IllegalArgumentException("Object was not map, was " + object.getClass());
+	public static <T> List<T> parse_elements_to_list(Object o, Function<Object, T> func) {
+		if (o instanceof List<?> list) {
+			var new_list = new ArrayList<T>();
+			for (var element : list)
+				new_list.add(func.apply(element));
+			return new_list;
+		} else throw new IllegalArgumentException("Object was not list, was " + o.getClass());
 	}
-	public static <T> List<T> parse_entries_to_list(Object object, BiFunction<String, Object, T> func) {
-		if (object instanceof UnmodifiableConfig config) {
+	@SuppressWarnings("unchecked")
+	public static <R> R parse_map(Object o, Function<Map<String, Object>, R> func) {
+		if (o instanceof UnmodifiableConfig config)
+			return func.apply(config.valueMap());
+		else if (o instanceof Map<?,?> map)
+			return func.apply((Map<String, Object>) map);
+		else throw new IllegalArgumentException("Object was not map, was " + o.getClass());
+	}
+	public static <T> List<T> parse_entries_to_list(Object o, BiFunction<String, Object, T> func) {
+		return parse_map(o, map -> {
 			var list = new ArrayList<T>();
-			for (var entry : config.valueMap().entrySet())
+			for (var entry : map.entrySet())
 				list.add(func.apply(entry.getKey(), entry.getValue()));
 			return list;
-		} else throw new IllegalArgumentException("Object was not map, was " + object.getClass());
+		});
 	}
-	public static <K, V> Map<K, V> parse_entries_to_map(Object object, Function<String, K> key_func,
+	public static <K, V> Map<K, V> parse_entries_to_map(Object o, Function<String, K> key_func,
 		Function<Object, V> value_func
 	) {
-		if (object instanceof UnmodifiableConfig config) {
-			var map = new HashMap<K, V>();
-			for (var entry : config.valueMap().entrySet())
-				map.put(key_func.apply(entry.getKey()), value_func.apply(entry.getValue()));
-			return map;
-		} else throw new IllegalArgumentException("Object was not map, was " + object.getClass());
+		return parse_map(o, map -> {
+			var return_map = new HashMap<K, V>();
+			for (var entry : map.entrySet())
+				return_map.put(key_func.apply(entry.getKey()), value_func.apply(entry.getValue()));
+			return return_map;
+		});
+	}
+	public static <R> R parse_entry(Object o, String key, Function<Object, R> func) {
+		return parse_map(o, m -> func.apply(m.get(key)));
 	}
 
 	// Registry Utils
-	public static <T> boolean registry_key_exists(IForgeRegistry<T> registry, Object object) {
-		if (object instanceof ResourceLocation resource)
+	public static <T> boolean registry_key_exists(IForgeRegistry<T> registry, Object o) {
+		if (o instanceof ResourceLocation resource)
 			return registry.containsKey(resource);
-		else if (object instanceof String string)
+		else if (o instanceof String string)
 			return registry.containsKey(ResourceLocation.parse(string));
 		else return false;
 	}
-	public static <T> T registry_get_value(IForgeRegistry<T> registry, Object object) {
-		if (object instanceof ResourceLocation resource)
+	public static <T> T registry_get_value(IForgeRegistry<T> registry, Object o) {
+		if (o instanceof ResourceLocation resource)
 			return registry.getValue(resource);
-		else if (object instanceof String string)
+		else if (o instanceof String string)
 			return registry.getValue(ResourceLocation.parse(string));
 		else throw new IllegalArgumentException("Object was not an instance of ResourceLocation or String. Was " +
-				object.getClass());
+				o.getClass());
 	}
 	public static Item get_item(Object object) {
 		return registry_get_value(ForgeRegistries.ITEMS, object);
@@ -87,7 +155,13 @@ public class FptConfigUtil {
 	public static Block get_block(Object object) {
 		return registry_get_value(ForgeRegistries.BLOCKS, object);
 	}
-	public static boolean blocks_exists(Object object) {
+	public static boolean block_exists(Object object) {
 		return registry_key_exists(ForgeRegistries.BLOCKS, object);
+	}
+	public static Fluid get_fluid(Object object) {
+		return registry_get_value(ForgeRegistries.FLUIDS, object);
+	}
+	public static boolean fluid_exists(Object object) {
+		return registry_key_exists(ForgeRegistries.FLUIDS, object);
 	}
 }

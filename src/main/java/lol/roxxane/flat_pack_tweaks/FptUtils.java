@@ -27,11 +27,11 @@ public class FptUtils {
 		return new ArrayList<>(List.of(elements));
 	}
 
-	public static CommentedConfig new_config(HashMap<String, Object> map) {
+	public static CommentedConfig config(HashMap<String, Object> map) {
 		return TomlFormat.newConfig(() -> map);
 	}
 
-	public static CommentedConfig new_config(Object... objects) {
+	public static CommentedConfig config(Object... objects) {
 		return TomlFormat.newConfig(() -> mutable_map(objects));
 	}
 

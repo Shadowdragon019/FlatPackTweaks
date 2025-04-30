@@ -3,7 +3,6 @@ package lol.roxxane.flat_pack_tweaks.config;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
-import lol.roxxane.flat_pack_tweaks.jei.InfiniDrillingRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static lol.roxxane.flat_pack_tweaks.FptUtils.new_config;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.config;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.mutable_list;
 import static lol.roxxane.flat_pack_tweaks.config.FptConfigUtil.*;
 
 @Mod.EventBusSubscriber(modid = Fpt.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -28,16 +28,26 @@ public class FptConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     public static final FptConfigValue<CommentedConfig, Map<Block, Item>> INFINI_DRILLING_RECIPES =
-        new FptConfigValue<>(
-            BUILDER.comment("Block to item").define("infini_drilling_recipes",
-                new_config("minecraft:raw_iron_block", "minecraft:raw_iron"),
+        FptConfigValue.of(BUILDER.comment("Block to item").define("infini_drilling_recipes",
+                config("minecraft:raw_iron_block", "minecraft:raw_iron"),
                 o -> validate_entries(o, (k, v) ->
-                    blocks_exists(k) && validate_string(v, FptConfigUtil::item_exists))),
+                    block_exists(k) && validate_string(v, FptConfigUtil::item_exists))),
             o -> parse_entries_to_map(o, FptConfigUtil::get_block, FptConfigUtil::get_item));
+
+    public static final FptConfigValue<List<CommentedConfig>, List<ItemInFluidRecipe>>
+        ITEM_IN_FLUID_RECIPES = FptConfigValue.of(BUILDER.define("item_in_fluid_recipes",
+            mutable_list(config(
+                "item_input", "minecraft:raw_iron",
+                "fluid_input", "minecraft:water",
+                "item_output", "minecraft:dirt")),
+            o -> validate_elements(o, ItemInFluidRecipe::validate)),
+        o -> parse_elements_to_list(o, ItemInFluidRecipe::from_config));
+
     public static final FptConfigValue<String, Item> SUPER_GLUE =
-        new FptConfigValue<>(
+        FptConfigValue.of(
             BUILDER.define("super_glue", "create:super_glue", FptConfigUtil::item_exists),
             FptConfigUtil::get_item);
+
     public static final BooleanValue REMOVE_TOOLBOX_RECIPES_FROM_JEI =
         BUILDER.define("remove_toolbox_recipes_from_jei", true);
     public static final BooleanValue WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE =
@@ -45,10 +55,15 @@ public class FptConfig {
     public static final BooleanValue ALL_ITEMS_ARE_FIREPROOF =
         BUILDER.define("all_items_are_fireproof", true);
     public static final IntValue HAND_CRANK_ROTATION_SPEED =
-        BUILDER.defineInRange("hand_crank_rotation_speed", 32, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        BUILDER.defineInRange("hand_crank_rotation_speed",
+            32, Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final DoubleValue WATER_WHEEL_SPEED_FACTOR =
         BUILDER.comment("By default, water wheels have 8 speed & large water wheels have 4 speed")
             .defineInRange("water_wheel_speed_factor", 1, 0, Double.MAX_VALUE);
+    public static final IntValue ITEM_TRANSFORMATION_PERIOD =
+        BUILDER.defineInRange("item_transformation_period", 1, 1, Integer.MAX_VALUE);
+    public static final IntValue FLUID_FLOW_SPEED =
+        BUILDER.defineInRange("fluid_flow_speed", 1, 1, Integer.MAX_VALUE);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 

@@ -3,6 +3,7 @@ package lol.roxxane.flat_pack_tweaks.jei;
 import com.simibubi.create.AllBlocks;
 import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.FptUtils;
+import lol.roxxane.flat_pack_tweaks.config.InfiniDrillingRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;

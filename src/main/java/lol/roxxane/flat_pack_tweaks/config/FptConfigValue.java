@@ -6,6 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+// SHOULD ONLY BE USED WITHIN FLAT PACK TWEAKS
 public class FptConfigValue<C, R> {
 	public static final ArrayList<FptConfigValue<?,?>> VALUES = new ArrayList<>();
 
@@ -18,10 +19,14 @@ public class FptConfigValue<C, R> {
 		this.config_value = config_value;
 		this.transformer = transformer;
 	}
+	
+	public static <C, R> FptConfigValue<C, R> of(ConfigValue<C> config_value, Function<C, R> transformer) {
+		return new FptConfigValue<>(config_value, transformer);
+	}
 
 	public R get() {
 		if (cached_value == null)
 			cached_value = transformer.apply(config_value.get());
-		return Preconditions.checkNotNull(cached_value, "Cannot get config value before val");
+		return Preconditions.checkNotNull(cached_value, "Cannot get config value before value is cached");
 	}
 }
