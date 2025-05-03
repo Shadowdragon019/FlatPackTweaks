@@ -31,7 +31,7 @@ public class FptJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(@NotNull IRecipeRegistration registration) {
-		registration.addRecipes(FptJeiRecipeTypes.INFINI_DRILLING, FptConfig.get_infini_drill_recipes());
+		registration.addRecipes(FptJeiRecipeTypes.INFINI_DRILLING, FptConfig.INFINI_DRILLING_RECIPES.get());
 	}
 
 	@Override

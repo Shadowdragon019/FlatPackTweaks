@@ -20,7 +20,6 @@ import static lol.roxxane.flat_pack_tweaks.config.FptConfig.ITEM_TRANSFORMATION_
 
 @Mod(Fpt.ID)
 public class Fpt {
-	public static final boolean DEBUG = false;
 	public static final String ID = "flat_pack_tweaks";
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final Registrate REGISTRATE = Registrate.create(ID);
@@ -44,11 +43,6 @@ public class Fpt {
 		
 		// Lang
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
-	}
-
-	public static void debug(Object o) {
-		if (DEBUG)
-			LOGGER.debug(o.toString());
 	}
 
 	public static void log(Object o) {

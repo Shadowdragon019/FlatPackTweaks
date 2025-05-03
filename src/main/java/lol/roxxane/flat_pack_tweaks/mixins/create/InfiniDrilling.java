@@ -38,7 +38,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 	}
 
 	// this is weirdly but not noticeably buggy because I can't *remove* progress (no, setting one to -1 doesn't fix the bugs)
-	// to see what i mean, place an ore, place a drill & make it mine the ore, remove the power, then rotate the drill with a wrench or replace the block with any other (don't power it again)
+	// to see what I mean, place an ore, place a drill & make it mine the ore, remove the power, then rotate the drill with a wrench or replace the block with any other (don't power it again)
 	// MC eventually removes all (presumably inactive) block breaking progresses after a while
 	@Inject(method = "tick",
 		remap = false,
