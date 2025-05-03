@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 // Try to reduce the amount of calls to pre-existing functions to improve readability.
 // As much as I love it, don't be clever.
 @SuppressWarnings("unused")
-public class FptValidating {
+public final class FptValidating {
 	public static final Predicate<Object> is_bool = o -> o instanceof Boolean;
 	public static final Predicate<Object> is_int = o -> o instanceof Integer;
 	public static final Predicate<Object> is_double = o -> o instanceof Double;

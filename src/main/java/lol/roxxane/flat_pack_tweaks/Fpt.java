@@ -19,7 +19,7 @@ import static lol.roxxane.flat_pack_tweaks.config.FptConfig.ITEM_IN_FLUID_RECIPE
 import static lol.roxxane.flat_pack_tweaks.config.FptConfig.ITEM_TRANSFORMATION_PERIOD;
 
 @Mod(Fpt.ID)
-public class Fpt {
+public final class Fpt {
 	public static final String ID = "flat_pack_tweaks";
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final Registrate REGISTRATE = Registrate.create(ID);
