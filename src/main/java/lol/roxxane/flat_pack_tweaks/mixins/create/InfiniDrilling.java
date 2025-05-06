@@ -49,8 +49,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 			target = "Lcom/simibubi/create/content/kinetics/base/BlockBreakingKineticBlockEntity;onBlockBroken(Lnet/minecraft/world/level/block/state/BlockState;)V"))
 	private void fpt$tick$Redirect(BlockBreakingKineticBlockEntity instance, BlockState state_to_break) {
 		var recipe = FptConfig.get_infini_drill_recipe(state_to_break.getBlock());
-		if (is_drill() && recipe != null) {
-			assert level != null;
+		if (is_drill() && recipe != null && level != null) {
 			var drill_state = level.getBlockState(worldPosition);
 			var drop_item_pos =
 				worldPosition.relative(drill_state.getValue(BlockStateProperties.FACING), -1);
@@ -111,7 +110,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 
 	// Turns a 10 tick dealy (lazyTick reset it) to a 0 tick delay
 	// This is needed else infini-drilling has an extra 10 tick delay.
-	// I honestly don't really care that this affect normal drilling. Might be a qol despite some additional lag.
+	// I honestly don't really care that this affects normal drilling. Might be a qol despite some additional lag.
 	@Inject(method = "tick",
 		remap = false,
 		at = @At(value = "FIELD",
