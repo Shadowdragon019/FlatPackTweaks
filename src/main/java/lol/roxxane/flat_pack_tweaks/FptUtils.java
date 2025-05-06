@@ -36,6 +36,7 @@ public class FptUtils {
 	}
 
 	public static String resource_recipe_string(ResourceLocation resource) {
-		return resource.getNamespace() + "_" + resource.getPath();
+		if (resource == null) return "nothing";
+		else return resource.getNamespace() + "_" + resource.getPath();
 	}
 }

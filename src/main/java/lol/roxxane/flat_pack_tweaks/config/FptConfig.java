@@ -30,21 +30,20 @@ public class FptConfig {
 			"minecraft:raw_iron_block",
 					config("item", "minecraft:raw_iron", "hardness", 10.0),
 					"minecraft:bedrock",
-					config("generates_fire", true, "hardness", 20.0),
+					config("item", "minecraft:air", "generates_fire", true, "hardness", 20.0),
 					"minecraft:obsidian",
 					config("item", "minecraft:obsidian", "generates_fire", true, "hardness", 100.0)),
 				o -> validate_map(o,
 					m -> validate_entries(m, is_block::test, v -> validate_map(v,
-						v_map -> validate_nullable_entry(v_map, "item", is_item) &&
+						v_map -> validate_entry(v_map, "item", is_item) &&
 							validate_nullable_entry(v_map, "generates_fire", is_bool) &&
 							validate_entry(v_map, "hardness", is_double))))),
 			o -> parse_map(o,
 				m -> parse_entries(FptParsing.parse_entries(m, parse_block::apply, parse_map),
 					(k, v) -> new InfiniDrillingRecipe(k,
-						FptParsing.parse_optional_entry(v, "item", parse_item, Items.AIR),
+						FptParsing.parse_entry(v, "item", parse_item),
 						parse_entry(v, "hardness", parse_double),
-						FptParsing.parse_optional_entry(v, "generates_fire", parse_bool, true)
-			))));
+						FptParsing.parse_optional_entry(v, "generates_fire", parse_bool, false)))));
 
 	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
