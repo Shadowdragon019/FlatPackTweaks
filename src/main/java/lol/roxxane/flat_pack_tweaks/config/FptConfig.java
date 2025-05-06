@@ -4,7 +4,6 @@ import com.electronwill.nightconfig.core.CommentedConfig;
 import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
-import lol.roxxane.flat_pack_tweaks.recipes.ItemInFluidRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -16,11 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
-import static lol.roxxane.flat_pack_tweaks.FptUtils.config;
-import static lol.roxxane.flat_pack_tweaks.FptUtils.mutable_list;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.*;
 import static lol.roxxane.flat_pack_tweaks.config.FptParsing.*;
 import static lol.roxxane.flat_pack_tweaks.config.FptValidating.*;
 
@@ -29,33 +26,25 @@ public class FptConfig {
 	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
 	public static final FptConfigValue<CommentedConfig, List<InfiniDrillingRecipe>> INFINI_DRILLING_RECIPES =
-		FptConfigValue.of(BUILDER.define("infini_drilling_recipes2",
-				config("minecraft:raw_iron_block", "minecraft:raw_iron",
-					"minecraft:bedrock", config("item", "minecraft:air", "generates_fire", true),
-					"minecraft:obsidian", config("item", "minecraft:obsidian")),
+		FptConfigValue.of(BUILDER.define("infini_drilling_recipes", config(
+			"minecraft:raw_iron_block",
+					config("item", "minecraft:raw_iron", "hardness", 10.0),
+					"minecraft:bedrock",
+					config("generates_fire", true, "hardness", 20.0),
+					"minecraft:obsidian",
+					config("item", "minecraft:obsidian", "generates_fire", true, "hardness", 100.0)),
 				o -> validate_map(o,
-					m -> validate_entries(m, is_block::test, v -> validate_item(v) || validate_map(v,
-						m2 -> validate_entry(m2, "item", is_item)
-							&& validate_nullable_entry(m2, "generates_fire", is_bool))))),
+					m -> validate_entries(m, is_block::test, v -> validate_map(v,
+						v_map -> validate_nullable_entry(v_map, "item", is_item) &&
+							validate_nullable_entry(v_map, "generates_fire", is_bool) &&
+							validate_entry(v_map, "hardness", is_double))))),
 			o -> parse_map(o,
-				m -> parse_entries(m,
-					(k, v) -> {
-					if (v instanceof String) return new InfiniDrillingRecipe(parse_block(k), parse_item(v));
-					else {
-						var v_map = parse_map(v);
-						return new InfiniDrillingRecipe(parse_block(k), parse_entry(v_map, "item", parse_item),
-							parse_entry(v_map, "generates_fire", parse_bool, true));
-					}}
-				)));
-
-	public static final FptConfigValue<List<CommentedConfig>, List<ItemInFluidRecipe>>
-		ITEM_IN_FLUID_RECIPES = FptConfigValue.of(BUILDER.define("item_in_fluid_recipes",
-			mutable_list(config(
-				"item_input", "minecraft:raw_iron",
-				"fluid_input", "minecraft:water",
-				"item_output", "minecraft:dirt")),
-			o -> validate_iterable(o, i -> validate_elements(i, ItemInFluidRecipe::validate))),
-		o -> parse_list(o, l -> parse_elements(l, ItemInFluidRecipe::from_config)));
+				m -> parse_entries(FptParsing.parse_entries(m, parse_block::apply, parse_map),
+					(k, v) -> new InfiniDrillingRecipe(k,
+						FptParsing.parse_optional_entry(v, "item", parse_item, Items.AIR),
+						parse_entry(v, "hardness", parse_double),
+						FptParsing.parse_optional_entry(v, "generates_fire", parse_bool, true)
+			))));
 
 	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
@@ -71,33 +60,26 @@ public class FptConfig {
 			32, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	public static final DoubleValue WATER_WHEEL_SPEED_FACTOR =
 		BUILDER.comment("By default, water wheels have 8 speed & large water wheels have 4 speed")
-			.defineInRange("water_wheel_speed_factor", 1, 0, Double.MAX_VALUE);
-	public static final IntValue ITEM_TRANSFORMATION_PERIOD =
-		BUILDER.defineInRange("item_transformation_period", 1, 1, Integer.MAX_VALUE);
+			.defineInRange("water_wheel_speed_factor", 2, 0, Double.MAX_VALUE);
 
 	public static final ForgeConfigSpec SPEC = BUILDER.build();
 
 	@SubscribeEvent
 	static void on_load(final ModConfigEvent event) {
 		if (SPEC.isLoaded())
-			// Invalidate caches
 			for (var value : FptConfigValue.VALUES)
-				value.cached_value = null;
+				value.invalidate();
 	}
 
 	// Infini-Drilling
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	public static boolean can_infini_drill(Block block) {
+	public static InfiniDrillingRecipe get_infini_drill_recipe(Block block) {
 		for (var recipe : INFINI_DRILLING_RECIPES.get())
 			if (recipe.block() == block)
-				return true;
-		return false;
-	}
-	public static @Nullable Item get_infini_drilling_result(Block block) {
-		for (var recipe : INFINI_DRILLING_RECIPES.get())
-			if (recipe.block() == block)
-				return recipe.item();
+				return recipe;
 		return null;
+	}
+	public static boolean can_infini_drill(Block block) {
+		return INFINI_DRILLING_RECIPES.get().stream().anyMatch(r -> r.block() == block);
 	}
 
 	// Superglues

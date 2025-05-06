@@ -47,7 +47,7 @@ public class InfiniDrillingRecipeCategory extends AbstractRecipeCategory<InfiniD
 		// TODO: Remove top texture if there is no output
 		// TODO: Texture the firey texture
 		graphics.blit(Fpt.resource("textures/jei/gui/drilling_drill.png"),
-			0, 0, recipe.generate_fire() ? 26 : 0, 0, 26, 77);
+			0, 0, recipe.generates_fire() ? 26 : 0, 0, 26, 77);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -156,15 +155,7 @@ public final class FptValidating {
 		return o instanceof Iterable<?>;
 	}
 
-	public static boolean validate_nullable_elements(Iterable<Object> i, Predicate<Object> p) {
-		if (i == null) return true;
-		for (var o : i)
-			if (!p.test(o))
-				return false;
-		return true;
-	}
 	public static boolean validate_elements(Iterable<Object> i, Predicate<Object> p) {
-		if (i == null) return false;
 		for (var o : i)
 			if (!p.test(o))
 				return false;
@@ -190,37 +181,18 @@ public final class FptValidating {
 	}
 
 	public static boolean validate_nullable_entry(Map<String, Object> m, String k, Predicate<Object> p) {
-		return m.get(k) == null || p.test(m.get(k));
+		var v = m.get(k);
+		return v == null || p.test(v);
 	}
 	public static boolean validate_entry(Map<String, Object> m, String k, Predicate<Object> p) {
-		return m.get(k) != null && p.test(m.get(k));
-	}
-
-	/** Applies {@code p} to every entry in the map */
-	public static boolean validate_nullable_entries(Map<String, Object> m, BiPredicate<String, Object> p) {
-		if (m == null) return true;
-		for (var e : m.entrySet())
-			if (!p.test(e.getKey(), e.getValue()))
-				return false;
-		return true;
+		var v = m.get(k);
+		return v != null && p.test(v);
 	}
 
 	/** Applies {@code p} to every entry in the map */
 	public static boolean validate_entries(Map<String, Object> m, BiPredicate<String, Object> p) {
-		if (m == null) return false;
 		for (var e : m.entrySet())
 			if (!p.test(e.getKey(), e.getValue()))
-				return false;
-		return true;
-	}
-
-	/** Applies {@code k_p} to every key in the map & {@code v_p} to every value in the map */
-	public static boolean validate_nullable_entries(Map<String, Object> m, Predicate<String> k_p,
-		Predicate<Object> v_p
-	) {
-		if (m == null) return true;
-		for (var e : m.entrySet())
-			if (!k_p.test(e.getKey()) || !v_p.test(e.getValue()))
 				return false;
 		return true;
 	}
@@ -231,19 +203,5 @@ public final class FptValidating {
 			if (!k_p.test(e.getKey()) || !v_p.test(e.getValue()))
 				return false;
 		return true;
-	}
-
-	public static boolean validate_nullable_keys(Map<String, Object> m, Predicate<String> p) {
-		return validate_nullable_elements(Collections.singleton(m.keySet()), k -> p.test((String) k));
-	}
-	public static boolean validate_keys(Map<String, Object> m, Predicate<String> p) {
-		return validate_elements(Collections.singleton(m.keySet()), k -> p.test((String) k));
-	}
-
-	public static boolean validate_nullable_values(Map<String, Object> m, Predicate<Object> p) {
-		return validate_nullable_elements(m.values(), p);
-	}
-	public static boolean validate_values(Map<String, Object> m, Predicate<Object> p) {
-		return validate_elements(m.values(), p);
 	}
 }
