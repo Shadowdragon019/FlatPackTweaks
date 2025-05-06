@@ -111,7 +111,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 		// I honestly don't really care that this affects normal drilling. Might be a qol despite some additional lag.
 		ticksUntilNextProgress = 0;
 
-		if (block_hardness <= -1 || (fpt$recipe == null || fpt$recipe.item() == Items.AIR)) return 0;
+		if (block_hardness <= -1 || (fpt$recipe == null || fpt$recipe.item() == Items.AIR)) return -1;
 		else return progress;
 	}
 
