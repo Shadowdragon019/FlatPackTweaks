@@ -48,6 +48,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 	@ModifyExpressionValue(method = "tick",
 		remap = false,
 		at = @At(value = "INVOKE",
+			remap = true,
 			target = "Lnet/minecraft/world/level/block/state/BlockState;getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F"))
 	private float fpt$tick$ModifyExpressionValue(float original, @Local BlockState state_to_break) {
 		fpt$recipe = FptConfig.get_infini_drill_recipe(state_to_break.getBlock());
@@ -102,6 +103,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 		index = 2,
 		at = @At(value = "INVOKE",
 			ordinal = 2,
+			remap = true,
 			target = "Lnet/minecraft/world/level/Level;destroyBlockProgress(ILnet/minecraft/core/BlockPos;I)V"))
 	private int fpt$tick$ModifyArg(int progress, @Local(ordinal = 0) float block_hardness) {
 		// Turns a 10 tick dealy (lazyTick reset it) to a 0 tick delay
