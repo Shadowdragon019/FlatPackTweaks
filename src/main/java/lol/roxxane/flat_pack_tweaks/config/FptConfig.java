@@ -3,6 +3,7 @@ package lol.roxxane.flat_pack_tweaks.config;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
+import lol.roxxane.flat_pack_tweaks.recipes.ItemInBlockRecipe;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -17,7 +18,8 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import java.util.List;
 
-import static lol.roxxane.flat_pack_tweaks.FptUtils.*;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.config;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.mutable_list;
 import static lol.roxxane.flat_pack_tweaks.config.FptParsing.*;
 import static lol.roxxane.flat_pack_tweaks.config.FptValidating.*;
 
@@ -39,11 +41,36 @@ public class FptConfig {
 							validate_nullable_entry(v_map, "generates_fire", is_bool) &&
 							validate_entry(v_map, "hardness", is_double))))),
 			o -> parse_map(o,
-				m -> parse_entries(FptParsing.parse_entries(m, parse_block::apply, parse_map),
+				m -> parse_entries(parse_entries(m, parse_block::apply, parse_map),
 					(k, v) -> new InfiniDrillingRecipe(k,
 						FptParsing.parse_entry(v, "item", parse_item),
 						parse_entry(v, "hardness", parse_double),
 						FptParsing.parse_optional_entry(v, "generates_fire", parse_bool, false)))));
+
+	public static final FptConfigValue<List<? extends CommentedConfig>, List<ItemInBlockRecipe>>
+		ITEM_IN_BLOCK_RECIPES = FptConfigValue.of(BUILDER.defineList("block_to_item_recipes",
+			mutable_list(config(
+				"block", "minecraft:fire",
+				"item_in", "minecraft:netherite_scrap",
+				"item_out", "minecraft:netherite_ingot",
+				"consume_block", true
+			), config(
+				"block", "minecraft:water",
+				"item_in", "minecraft:bucket",
+				"item_out", "minecraft:water_bucket",
+				"consume_block", false
+			)),
+			element -> validate_map(element,
+				map -> validate_entry(map, "block", is_block) &&
+					validate_entry(map, "item_in", is_item) &&
+					validate_entry(map, "item_out", is_item) &&
+					validate_entry(map, "consume_block", is_bool))),
+			o -> parse_elements(parse_elements(parse_list(o), parse_map), map -> new ItemInBlockRecipe(
+				parse_entry(map, "block", parse_block),
+				parse_entry(map, "item_in", parse_item),
+				parse_entry(map, "item_out", parse_item),
+				parse_entry(map, "consume_block", parse_bool)
+			)));
 
 	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
@@ -79,6 +106,14 @@ public class FptConfig {
 	}
 	public static boolean can_infini_drill(Block block) {
 		return INFINI_DRILLING_RECIPES.get().stream().anyMatch(r -> r.block() == block);
+	}
+
+	// Item In Block Recipe
+	public static ItemInBlockRecipe get_item_in_block_recipe(Block block, Item item) {
+		for (var recipe : ITEM_IN_BLOCK_RECIPES.get())
+			if (recipe.block() == block && recipe.item_in() == item)
+				return recipe;
+		return null;
 	}
 
 	// Superglues

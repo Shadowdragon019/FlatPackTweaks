@@ -202,14 +202,14 @@ public final class FptParsing {
 	}
 
 	/** Parses elements to a list */
-	public static <E, R> List<R> parse_elements(Iterable<E> i, Function<E, R> func) {
+	public static <E, R> List<R> parse_elements(List<E> i, Function<E, R> func) {
 		var list = new ArrayList<R>();
 		for (var e : i)
 			list.add(func.apply(e));
 		return list;
 	}
 	/** Parses elements to a map */
-	public static <E, K, V> Map<K, V> parse_elements(Iterable<E> i, Function<Object, K> k_func,
+	public static <E, K, V> Map<K, V> parse_elements(List<E> i, Function<Object, K> k_func,
 		Function<Object, V> v_func
 	) {
 		var map = new HashMap<K, V>();

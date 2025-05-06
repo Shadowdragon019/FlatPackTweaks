@@ -8,6 +8,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -23,7 +24,7 @@ public final class FptValidating {
 	public static final Predicate<Object> is_item = FptValidating::validate_item;
 	public static final Predicate<Object> is_block = FptValidating::validate_block;
 	public static final Predicate<Object> is_fluid = FptValidating::validate_fluid;
-	public static final Predicate<Object> is_list = FptValidating::validate_iterable;
+	public static final Predicate<Object> is_list = FptValidating::validate_list;
 	public static final Predicate<Object> is_map = FptValidating::validate_map;
 
 	// Bool
@@ -139,23 +140,23 @@ public final class FptValidating {
 		return validate_registry(o, ForgeRegistries.FLUIDS);
 	}
 
-	// Iterable
+	// List
 	@SuppressWarnings("unchecked")
-	public static boolean validate_nullable_iterable(Object o, Predicate<Iterable<Object>> p) {
-		return o == null || o instanceof Iterable<?> iterable && p.test((Iterable<Object>) iterable);
+	public static boolean validate_nullable_list(Object o, Predicate<List<Object>> p) {
+		return o == null || o instanceof List<?> l && p.test((List<Object>) l);
 	}
-	public static boolean validate_nullable_iterable(Object o) {
-		return o == null || o instanceof Iterable<?>;
+	public static boolean validate_nullable_list(Object o) {
+		return o == null || o instanceof List<?>;
 	}
 	@SuppressWarnings("unchecked")
-	public static boolean validate_iterable(Object o, Predicate<Iterable<Object>> p) {
-		return o instanceof Iterable<?> iterable && p.test((Iterable<Object>) iterable);
+	public static boolean validate_list(Object o, Predicate<List<Object>> p) {
+		return o instanceof List<?> l && p.test((List<Object>) l);
 	}
-	public static boolean validate_iterable(Object o) {
-		return o instanceof Iterable<?>;
+	public static boolean validate_list(Object o) {
+		return o instanceof List<?>;
 	}
 
-	public static boolean validate_elements(Iterable<Object> i, Predicate<Object> p) {
+	public static boolean validate_elements(List<Object> i, Predicate<Object> p) {
 		for (var o : i)
 			if (!p.test(o))
 				return false;
