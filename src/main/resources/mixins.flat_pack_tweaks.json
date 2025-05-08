@@ -21,6 +21,8 @@
 		"create.change_what_functions_as_super_glue.UpdateIsGlueSelectionHandler",
 		"jei.RemoveCraftingTableAsCatalyst",
 		"lychee.RemoveBuildersButtonLongPress",
+		"minecraft.BlockHardnessLimiter",
+		"minecraft.EverythingIsMinable",
 		"minecraft.ItemsAreAlwaysFireproof"
 	]
 }
