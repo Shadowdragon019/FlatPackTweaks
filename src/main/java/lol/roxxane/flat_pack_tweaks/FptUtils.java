@@ -23,7 +23,7 @@ public class FptUtils {
 	}
 
 	@SafeVarargs
-	public static <T> ArrayList<T> mutable_list(T... elements) {
+	public static <T> ArrayList<T> list(T... elements) {
 		return new ArrayList<>(List.of(elements));
 	}
 

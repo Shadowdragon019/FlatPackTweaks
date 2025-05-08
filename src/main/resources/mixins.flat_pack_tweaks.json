@@ -22,7 +22,9 @@
 		"jei.RemoveCraftingTableAsCatalyst",
 		"lychee.RemoveBuildersButtonLongPress",
 		"minecraft.BlockHardnessLimiter",
-		"minecraft.EverythingIsMinable",
-		"minecraft.ItemsAreAlwaysFireproof"
+		"minecraft.ItemsAreAlwaysFireproof",
+		"minecraft.everything_is_minable.BlockBehaviour",
+		"minecraft.everything_is_minable.DiggerItem",
+		"minecraft.everything_is_minable.TierSortingRegistry"
 	]
 }

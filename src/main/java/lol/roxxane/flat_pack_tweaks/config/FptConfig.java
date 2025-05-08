@@ -3,8 +3,8 @@ package lol.roxxane.flat_pack_tweaks.config;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
-import lol.roxxane.flat_pack_tweaks.recipes.ItemInBlockRecipe;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
+import lol.roxxane.flat_pack_tweaks.recipes.ItemInBlockRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +16,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static lol.roxxane.flat_pack_tweaks.FptUtils.config;
-import static lol.roxxane.flat_pack_tweaks.FptUtils.mutable_list;
+import static lol.roxxane.flat_pack_tweaks.FptUtils.list;
 import static lol.roxxane.flat_pack_tweaks.config.FptParsing.*;
 import static lol.roxxane.flat_pack_tweaks.config.FptValidating.*;
 
@@ -49,7 +50,7 @@ public class FptConfig {
 
 	public static final FptConfigValue<List<? extends CommentedConfig>, List<ItemInBlockRecipe>>
 		ITEM_IN_BLOCK_RECIPES = FptConfigValue.of(BUILDER.defineList("block_to_item_recipes",
-			mutable_list(config(
+			list(config(
 				"block", "minecraft:fire",
 				"item_in", "minecraft:netherite_scrap",
 				"item_out", "minecraft:netherite_ingot",
@@ -71,6 +72,12 @@ public class FptConfig {
 				parse_entry(map, "item_out", parse_item),
 				parse_entry(map, "consume_block", parse_bool)
 			)));
+	public static final FptConfigValue<List<? extends ArrayList<String>>, List<List<Item>>> SWITCHERS =
+	FptConfigValue.of(BUILDER.defineList("switchers",
+			list(list("dirt", "stone"), list("iron_ore", "diamond_ore")),
+			entry -> validate_list(entry, entry_list -> validate_elements(entry_list, is_item))),
+		object -> parse_list(object, list -> parse_elements(list, entry ->
+			parse_list(entry, entry_list -> parse_elements(entry_list, parse_item)))));
 
 	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
