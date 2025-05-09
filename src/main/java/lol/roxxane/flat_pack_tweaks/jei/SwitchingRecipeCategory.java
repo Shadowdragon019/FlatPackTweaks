@@ -13,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRec
 			Component.translatable("gui.flat_pack_tweaks.category.switching"),
 			gui_helper.createDrawableItemStack(new ItemStack(Blocks.BARRIER)), //TODO: Icon
 			126,
-			154
+			93
 		);
 	}
 
@@ -37,7 +36,7 @@ public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRec
 		var item_count = recipe.items().size();
 		var items = recipe.items();
 
-		TriConsumer<List<Item>, Integer, Boolean> add_slots = (row_items, y, is_input) -> {
+		BiConsumer<List<Item>, Integer> add_slots = (row_items, y) -> {
 			var row_item_count = row_items.size();
 			var horizontal_size = 18*row_item_count;
 			var x = getWidth()/2-horizontal_size/2;
@@ -45,26 +44,24 @@ public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRec
 			var i = -1;
 			while (i < row_item_count-1) {
 				i++;
-				builder.addSlot(is_input ? RecipeIngredientRole.INPUT : RecipeIngredientRole.OUTPUT,
-					x+i*18+1, y+1).addItemStack(row_items.get(i).getDefaultInstance());
+				builder.addSlot(RecipeIngredientRole.INPUT, x+i*18+1, y+1)
+					.addItemStack(row_items.get(i).getDefaultInstance());
 			}
 		};
 
-		if (item_count > 0 && item_count <= 7) {
-			add_slots.accept(items.subList(0, item_count), 36, true);
-			add_slots.accept(items.subList(0, item_count), 100, false);
-		} else if (item_count <= 14) {
-			add_slots.accept(items.subList(0, item_count-7), 18, true);
-			add_slots.accept(items.subList(item_count-7, item_count), 36, true);
-			add_slots.accept(items.subList(item_count-7, item_count), 100, false);
-			add_slots.accept(items.subList(0, item_count-7), 118, false);
+		for (var item : items)
+			builder.addSlot(RecipeIngredientRole.OUTPUT, 9999, 9999)
+				.addItemStack(item.getDefaultInstance());
+
+		if (item_count > 0 && item_count <= 7)
+			add_slots.accept(items.subList(0, item_count), 57);
+		else if (item_count <= 14) {
+			add_slots.accept(items.subList(0, item_count-7), 48);
+			add_slots.accept(items.subList(item_count-7, item_count), 66);
 		} else {
-			add_slots.accept(items.subList(0, item_count-14), 0, true);
-			add_slots.accept(items.subList(item_count-14, item_count-7), 18, true);
-			add_slots.accept(items.subList(item_count-7, item_count), 36, true);
-			add_slots.accept(items.subList(item_count-7, item_count), 100, false);
-			add_slots.accept(items.subList(item_count-14, item_count-7), 118, false);
-			add_slots.accept(items.subList(0, item_count-14), 136, false);
+			add_slots.accept(items.subList(0, item_count-14), 39);
+			add_slots.accept(items.subList(item_count-14, item_count-7), 57);
+			add_slots.accept(items.subList(item_count-7, item_count), 75);
 		}
 	}
 
@@ -86,26 +83,18 @@ public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRec
 			}
 		};
 
-		if (item_count > 0 && item_count <= 7) {
-			draw_row.accept(item_count, 36);
-			draw_row.accept(item_count, 100);
-		} else if (item_count <= 14) {
-			draw_row.accept(item_count-7, 18);
-			draw_row.accept(7, 36);
-
-			draw_row.accept(7, 100);
-			draw_row.accept(item_count-7, 118);
-		} else {
-			draw_row.accept(item_count-14, 0);
-			draw_row.accept(7, 18);
-			draw_row.accept(7, 36);
-
-			draw_row.accept(7, 100);
-			draw_row.accept(7, 118);
-			draw_row.accept(item_count-14, 136);
-		}
-
 		graphics.blit(Fpt.resource("textures/jei/gui/switching.png"),
-			47, 61, 0, 32, 32, 32);
+			47, 0, 0, 32, 32, 32);
+
+		if (item_count > 0 && item_count <= 7)
+			draw_row.accept(item_count, 57);
+		else if (item_count <= 14) {
+			draw_row.accept(item_count-7, 48);
+			draw_row.accept(7, 66);
+		} else {
+			draw_row.accept(item_count-14, 39);
+			draw_row.accept(7, 57);
+			draw_row.accept(7, 75);
+		}
 	}
 }
