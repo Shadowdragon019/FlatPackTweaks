@@ -15,6 +15,10 @@ import org.jetbrains.annotations.NotNull;
 @JeiPlugin
 public class FptJeiPlugin implements IModPlugin {
 	public static final ResourceLocation ID = Fpt.resource(Fpt.ID);
+	public static final ResourceLocation SWITCHING_TEXTURE_RESOURCE =
+		Fpt.resource("textures/jei/gui/switching.png");
+	public static final ResourceLocation INFINI_DRILLING_TEXTURE_RESOURCE =
+		Fpt.resource("textures/jei/gui/drilling_drill.png");
 
 	@Override
 	public @NotNull ResourceLocation getPluginUid() {

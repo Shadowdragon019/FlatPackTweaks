@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static lol.roxxane.flat_pack_tweaks.Fpt.resource;
 import static lol.roxxane.flat_pack_tweaks.FptUtils.resource_recipe_string;
+import static lol.roxxane.flat_pack_tweaks.jei.FptJeiPlugin.INFINI_DRILLING_TEXTURE_RESOURCE;
 
 
 public class InfiniDrillingRecipeCategory extends AbstractRecipeCategory<InfiniDrillingRecipe> {
@@ -47,16 +48,16 @@ public class InfiniDrillingRecipeCategory extends AbstractRecipeCategory<InfiniD
 		@NotNull GuiGraphics graphics, double $2, double $3
 	) {
 		if (recipe.generates_fire())
-			graphics.blit(resource("textures/jei/gui/drilling_drill.png"),
+			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
 				0, 33, 26, 33, 26, 20);
-		else graphics.blit(resource("textures/jei/gui/drilling_drill.png"),
+		else graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
 				0, 33, 0, 33, 26, 20);
 
 		// Output slot
-		graphics.blit(resource("textures/jei/gui/drilling_drill.png"),
+		graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
 			4, 59, 4, 59, 18, 18);
 		if (recipe.item() != Items.AIR)
-			graphics.blit(resource("textures/jei/gui/drilling_drill.png"),
+			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
 				0, 0, 0, 0, 26, 26);
 	}
 

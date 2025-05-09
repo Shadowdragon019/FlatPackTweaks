@@ -1,6 +1,5 @@
 package lol.roxxane.flat_pack_tweaks.jei;
 
-import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.recipes.SwitchingRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -11,19 +10,19 @@ import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+
+import static lol.roxxane.flat_pack_tweaks.jei.FptJeiPlugin.SWITCHING_TEXTURE_RESOURCE;
 
 public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRecipe> {
 	public SwitchingRecipeCategory(IGuiHelper gui_helper) {
 		super(
 			FptJeiRecipeTypes.SWITCHING,
 			Component.translatable("gui.flat_pack_tweaks.category.switching"),
-			gui_helper.createDrawableItemStack(new ItemStack(Blocks.BARRIER)), //TODO: Icon
+			gui_helper.drawableBuilder(SWITCHING_TEXTURE_RESOURCE, 0, 64, 16, 16).build(),
 			126,
 			93
 		);
@@ -78,12 +77,12 @@ public class SwitchingRecipeCategory extends AbstractRecipeCategory<SwitchingRec
 			var i = -1;
 			while (i < row_item_count-1) {
 				i++;
-				graphics.blit(Fpt.resource("textures/jei/gui/switching.png"),
+				graphics.blit(SWITCHING_TEXTURE_RESOURCE,
 					x+i*18, y, 0, 0, 18, 18);
 			}
 		};
 
-		graphics.blit(Fpt.resource("textures/jei/gui/switching.png"),
+		graphics.blit(SWITCHING_TEXTURE_RESOURCE,
 			47, 0, 0, 32, 32, 32);
 
 		if (item_count > 0 && item_count <= 7)
