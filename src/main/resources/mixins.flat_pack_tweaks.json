@@ -23,6 +23,7 @@
 		"lychee.RemoveBuildersButtonLongPress",
 		"minecraft.BlockHardnessLimiter",
 		"minecraft.ItemsAreAlwaysFireproof",
+		"minecraft.OnlyTinySpruces",
 		"minecraft.everything_is_minable.BlockBehaviour",
 		"minecraft.everything_is_minable.DiggerItem",
 		"minecraft.everything_is_minable.TierSortingRegistry"
