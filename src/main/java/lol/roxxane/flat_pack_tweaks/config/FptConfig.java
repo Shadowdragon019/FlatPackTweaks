@@ -5,6 +5,7 @@ import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
 import lol.roxxane.flat_pack_tweaks.recipes.ItemInBlockRecipe;
+import lol.roxxane.flat_pack_tweaks.recipes.SwitchingRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -72,12 +73,14 @@ public class FptConfig {
 				parse_entry(map, "item_out", parse_item),
 				parse_entry(map, "consume_block", parse_bool)
 			)));
-	public static final FptConfigValue<List<? extends ArrayList<String>>, List<List<Item>>> SWITCHERS =
-	FptConfigValue.of(BUILDER.defineList("switchers",
-			list(list("dirt", "stone"), list("iron_ore", "diamond_ore")),
-			entry -> validate_list(entry, entry_list -> validate_elements(entry_list, is_item))),
-		object -> parse_list(object, list -> parse_elements(list, entry ->
-			parse_list(entry, entry_list -> parse_elements(entry_list, parse_item)))));
+	public static final FptConfigValue<List<? extends ArrayList<String>>, List<SwitchingRecipe>> SWITCHERS =
+		FptConfigValue.of(BUILDER.defineList("switchers",
+				list(list("dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt",
+					"dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"),
+					list("iron_ore", "diamond_ore")),
+				entry -> validate_list(entry, entry_list -> entry_list.size() <= 21 && validate_elements(entry_list, is_item))),
+			object -> parse_list(object, list -> parse_elements(list, entry ->
+				parse_list(entry, entry_list -> new SwitchingRecipe(parse_elements(entry_list, parse_item))))));
 
 	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
