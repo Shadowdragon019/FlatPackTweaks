@@ -40,8 +40,10 @@ public final class Fpt {
 		
 		// Lang
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
+		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.switching", "Switching");
 	}
 
+	@SuppressWarnings("unused")
 	public static void log(Object o) {
 		LOGGER.info(o.toString());
 	}
