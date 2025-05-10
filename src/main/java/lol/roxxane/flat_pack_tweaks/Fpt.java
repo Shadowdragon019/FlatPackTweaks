@@ -31,11 +31,15 @@ public final class Fpt {
 		GogglesItem.addIsWearingPredicate($ -> true);
 
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.LevelTickEvent event) -> {
-			if (event.level instanceof ServerLevelAccessor level && !event.level.isClientSide)
-				level.create$getEntityTickList().forEach(entity -> {
-					if (entity.isAlive() && entity instanceof ItemEntity item_entity)
-						item_in_block_transformation(item_entity);
-				});
+			var level = event.level;
+
+			if (!level.isClientSide) {
+				if (level instanceof ServerLevelAccessor level_with_entity_tick_list)
+					level_with_entity_tick_list.create$getEntityTickList().forEach(entity -> {
+						if (entity.isAlive() && entity instanceof ItemEntity item_entity)
+							item_in_block_transformation(item_entity);
+					});
+			}
 		});
 		
 		// Lang

@@ -12,6 +12,7 @@
 		"create.InfiniDrilling",
 		"create.RemoveToolboxRecipesFromJei",
 		"create.WrenchAnyDestructibleItem",
+		"create.WrenchTrees",
 		"create.change_what_functions_as_super_glue.DenyAttackingBlocks",
 		"create.change_what_functions_as_super_glue.DenyBlockInteractions",
 		"create.change_what_functions_as_super_glue.MakeChassisSticky",
