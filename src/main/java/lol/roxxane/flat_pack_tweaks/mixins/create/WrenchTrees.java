@@ -20,7 +20,6 @@ import java.util.HashSet;
 
 @Mixin(WrenchItem.class)
 abstract class WrenchTrees {
-
 	@Inject(method = "onItemUseOnOther",
 		remap = false,
 		at = @At(value = "INVOKE",
