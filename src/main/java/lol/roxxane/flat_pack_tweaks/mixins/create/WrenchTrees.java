@@ -61,17 +61,16 @@ abstract class WrenchTrees {
 	@Unique
 	private HashSet<BlockPos> fpt$gather_tree_blocks(Level level, BlockPos starting_pos, HashSet<BlockPos> set) {
 		for (var offset : fpt$check_offsets) {
-			var pos = starting_pos.offset(offset.getX(), offset.getY(), offset.getZ());
+			var pos = starting_pos.offset(offset);
 			var state = level.getBlockState(pos);
 			if (!set.contains(pos) && (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES))) {
 				set.add(pos);
 				fpt$blocks_destroyed++;
-				if (fpt$blocks_destroyed < 64)
+				if (fpt$blocks_destroyed < 512)
 					fpt$gather_tree_blocks(level, pos, set);
 				else break;
 			}
 		}
 		return set;
-
 	}
 }
