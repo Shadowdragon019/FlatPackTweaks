@@ -2,6 +2,7 @@ package lol.roxxane.flat_pack_tweaks.mixins.create;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
+import lol.roxxane.flat_pack_tweaks.Fpt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -17,9 +18,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashSet;
+import java.util.List;
 
 @Mixin(WrenchItem.class)
 abstract class WrenchTrees {
+	@Unique private int fpt$blocks_destroyed = 0; // This doesn't work exactly because...
+	// reasons I don't understand. But meh, good enough
+	@Unique private final List<BlockPos> fpt$check_offsets = List.of(
+		new BlockPos(1, 0, 0), new BlockPos(-1, 0, 0),
+		new BlockPos(0, 1, 0), new BlockPos(0, -1, 0),
+		new BlockPos(0, 0, 1), new BlockPos(0, 0, -1));
+
 	@Inject(method = "onItemUseOnOther",
 		remap = false,
 		at = @At(value = "INVOKE",
@@ -32,6 +41,7 @@ abstract class WrenchTrees {
 
 		if (!level.isClientSide) {
 			var player = context.getPlayer();
+			fpt$blocks_destroyed = 0;
 
 			for (var pos : fpt$gather_tree_blocks(level, starting_pos, new HashSet<>())) {
 				var state = level.getBlockState(pos);
@@ -44,21 +54,24 @@ abstract class WrenchTrees {
 				level.destroyBlock(pos, false);
 				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 			}
+			Fpt.log(fpt$blocks_destroyed);
 		}
 	}
 
 	@Unique
 	private HashSet<BlockPos> fpt$gather_tree_blocks(Level level, BlockPos starting_pos, HashSet<BlockPos> set) {
-		for (int x = 1; x >= -1; --x)
-			for (int y = 1; y >= -1; --y)
-				for (int z = 1; z >= -1; --z) {
-					var pos = starting_pos.offset(x, y, z);
-					var state = level.getBlockState(pos);
-					if (!set.contains(pos) && (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES))) {
-						set.add(pos);
-						fpt$gather_tree_blocks(level, pos, set);
-					}
-				}
+		for (var offset : fpt$check_offsets) {
+			var pos = starting_pos.offset(offset.getX(), offset.getY(), offset.getZ());
+			var state = level.getBlockState(pos);
+			if (!set.contains(pos) && (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES))) {
+				set.add(pos);
+				fpt$blocks_destroyed++;
+				if (fpt$blocks_destroyed < 64)
+					fpt$gather_tree_blocks(level, pos, set);
+				else break;
+			}
+		}
 		return set;
+
 	}
 }
