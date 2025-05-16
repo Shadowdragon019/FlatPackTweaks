@@ -1,7 +1,7 @@
 package lol.roxxane.flat_pack_tweaks.mixins.create.change_what_functions_as_super_glue;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +13,6 @@ abstract class DenyAttackingBlocks {
 	@ModifyReturnValue(method = "canAttackBlock",
 		at = @At("RETURN"))
 	private boolean fpt$canAttackBlock$ModifyReturnValue(boolean original) {
-		return FptConfig.SUPER_GLUE.get() != (Object) this && original;
+		return FptServerConfig.SUPER_GLUE.get() != (Object) this && original;
 	}
 }

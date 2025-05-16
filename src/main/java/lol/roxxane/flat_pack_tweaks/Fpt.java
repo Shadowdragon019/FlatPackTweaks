@@ -4,7 +4,8 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
 import com.simibubi.create.foundation.mixin.accessor.ServerLevelAccessor;
 import com.tterrag.registrate.Registrate;
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptClientConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.block.Blocks;
@@ -26,7 +27,8 @@ public final class Fpt {
 	}
 
 	public Fpt(FMLJavaModLoadingContext context) {
-		context.registerConfig(ModConfig.Type.SERVER, FptConfig.SPEC);
+		context.registerConfig(ModConfig.Type.SERVER, FptServerConfig.SPEC);
+		context.registerConfig(ModConfig.Type.CLIENT, FptClientConfig.SPEC);
 
 		GogglesItem.addIsWearingPredicate($ -> true);
 
@@ -60,7 +62,7 @@ public final class Fpt {
 		var stack = item_entity.getItem();
 		var stack_count = stack.getCount();
 		var delta = item_entity.getDeltaMovement();
-		var recipe = FptConfig.get_item_in_block_recipe(block, item_entity.getItem().getItem());
+		var recipe = FptServerConfig.get_item_in_block_recipe(block, item_entity.getItem().getItem());
 
 		if (recipe != null) {
 			item_entity.setItem(stack.copyWithCount(stack_count - 1));

@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.drill.DrillBlockEntity;
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -51,7 +51,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 			remap = true,
 			target = "Lnet/minecraft/world/level/block/state/BlockState;getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F"))
 	private float fpt$tick$ModifyExpressionValue(float original, @Local BlockState state_to_break) {
-		fpt$recipe = FptConfig.get_infini_drill_recipe(state_to_break.getBlock());
+		fpt$recipe = FptServerConfig.get_infini_drill_recipe(state_to_break.getBlock());
 		if (fpt$recipe == null) return original;
 		else return (float) fpt$recipe.hardness();
 	}
@@ -122,7 +122,7 @@ abstract class InfiniDrilling extends KineticBlockEntity {
 		@Local(argsOnly = true) BlockState state_to_break
 	) {
 		if ((BlockBreakingKineticBlockEntity) (Object) this instanceof DrillBlockEntity)
-			return original || FptConfig.can_infini_drill(state_to_break.getBlock());
+			return original || FptServerConfig.can_infini_drill(state_to_break.getBlock());
 		else return original;
 	}
 }

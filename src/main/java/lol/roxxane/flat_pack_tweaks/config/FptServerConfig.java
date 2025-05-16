@@ -26,7 +26,7 @@ import static lol.roxxane.flat_pack_tweaks.config.FptParsing.*;
 import static lol.roxxane.flat_pack_tweaks.config.FptValidating.*;
 
 @Mod.EventBusSubscriber(modid = Fpt.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class FptConfig {
+public class FptServerConfig {
 	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
 	public static final FptConfigValue<CommentedConfig, List<InfiniDrillingRecipe>> INFINI_DRILLING_RECIPES =

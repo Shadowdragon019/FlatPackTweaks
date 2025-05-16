@@ -2,7 +2,7 @@ package lol.roxxane.flat_pack_tweaks.jei;
 
 import com.simibubi.create.AllBlocks;
 import lol.roxxane.flat_pack_tweaks.Fpt;
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -36,8 +36,8 @@ public class FptJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(@NotNull IRecipeRegistration registration) {
-		registration.addRecipes(FptJeiRecipeTypes.INFINI_DRILLING, FptConfig.INFINI_DRILLING_RECIPES.get());
-		registration.addRecipes(FptJeiRecipeTypes.SWITCHING, FptConfig.SWITCHERS.get());
+		registration.addRecipes(FptJeiRecipeTypes.INFINI_DRILLING, FptServerConfig.INFINI_DRILLING_RECIPES.get());
+		registration.addRecipes(FptJeiRecipeTypes.SWITCHING, FptServerConfig.SWITCHERS.get());
 	}
 
 	@Override

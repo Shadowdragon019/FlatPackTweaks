@@ -2,7 +2,6 @@ package lol.roxxane.flat_pack_tweaks.mixins.create;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
-import lol.roxxane.flat_pack_tweaks.Fpt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -22,8 +21,8 @@ import java.util.HashSet;
 @Mixin(WrenchItem.class)
 abstract class WrenchTrees {
 	@Unique
-	private int fpt$blocks_destroyed = 0; // This doesn't work exactly because...
-	// reasons I don't understand. But meh, good enough
+	private int fpt$blocks_destroyed = 0; // This doesn't work exactly because... concurrency...?
+	// Eh - reasons I don't understand. But meh, good enough
 
 	@Inject(method = "onItemUseOnOther",
 		remap = false,
@@ -50,7 +49,6 @@ abstract class WrenchTrees {
 				level.destroyBlock(pos, false);
 				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 			}
-			Fpt.log(fpt$blocks_destroyed);
 		}
 	}
 

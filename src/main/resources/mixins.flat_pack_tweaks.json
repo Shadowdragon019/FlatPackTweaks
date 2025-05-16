@@ -12,6 +12,7 @@
 		"create.ConfigurableWaterWheelSpeed",
 		"create.InfiniDrilling",
 		"create.RemoveToolboxRecipesFromJei",
+		"create.ValueSettingsChangeTextColor",
 		"create.WrenchAnyDestructibleItem",
 		"create.WrenchTrees",
 		"create.change_what_functions_as_super_glue.DenyAttackingBlocks",

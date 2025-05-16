@@ -3,7 +3,7 @@ package lol.roxxane.flat_pack_tweaks.mixins.create;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ abstract class WrenchAnyDestructibleItem {
 	private boolean fpt$useOn$ModifyExpressionValue(boolean original, @Local() BlockState state,
 		@Local(argsOnly = true) UseOnContext context
 	) {
-		if (FptConfig.WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE.get())
+		if (FptServerConfig.WRENCH_CAN_PICKUP_ANYTHING_DESTRUCTIBLE.get())
 			return state.getDestroySpeed(context.getLevel(), context.getClickedPos()) > -1;
 		else return original;
 	}

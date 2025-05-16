@@ -1,6 +1,6 @@
 package lol.roxxane.flat_pack_tweaks.mixins.minecraft;
 
-import lol.roxxane.flat_pack_tweaks.config.FptConfig;
+import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ abstract class ItemsAreAlwaysFireproof {
 		cancellable = true,
 		at = @At("RETURN"))
 	private void fpt$isFireResistant$Inject(CallbackInfoReturnable<Boolean> cir) {
-		if (FptConfig.ALL_ITEMS_ARE_FIREPROOF.get())
+		if (FptServerConfig.ALL_ITEMS_ARE_FIREPROOF.get())
 			cir.setReturnValue(true);
 	}
 }
