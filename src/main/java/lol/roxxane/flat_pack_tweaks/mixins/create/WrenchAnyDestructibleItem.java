@@ -3,7 +3,7 @@ package lol.roxxane.flat_pack_tweaks.mixins.create;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
-import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
+import lol.roxxane.flat_pack_tweaks.config.server.FptServerConfig;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;

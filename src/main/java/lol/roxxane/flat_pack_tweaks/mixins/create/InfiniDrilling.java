@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.drill.DrillBlockEntity;
-import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
+import lol.roxxane.flat_pack_tweaks.config.server.FptServerConfig;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

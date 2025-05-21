@@ -2,7 +2,7 @@ package lol.roxxane.flat_pack_tweaks.mixins.create.change_what_functions_as_supe
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.content.contraptions.glue.SuperGlueSelectionHelper;
-import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
+import lol.roxxane.flat_pack_tweaks.config.server.FptServerConfig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;

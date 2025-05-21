@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.config;
+package lol.roxxane.flat_pack_tweaks.config.server;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.simibubi.create.AllItems;

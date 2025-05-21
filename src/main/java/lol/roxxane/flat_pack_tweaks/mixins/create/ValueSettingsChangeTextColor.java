@@ -1,7 +1,7 @@
 package lol.roxxane.flat_pack_tweaks.mixins.create;
 
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsScreen;
-import lol.roxxane.flat_pack_tweaks.config.FptClientConfig;
+import lol.roxxane.flat_pack_tweaks.config.client.FptClientConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;

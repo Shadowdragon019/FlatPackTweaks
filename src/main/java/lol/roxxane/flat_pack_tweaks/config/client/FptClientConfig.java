@@ -1,4 +1,4 @@
-package lol.roxxane.flat_pack_tweaks.config;
+package lol.roxxane.flat_pack_tweaks.config.client;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

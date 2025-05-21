@@ -2,7 +2,7 @@ package lol.roxxane.flat_pack_tweaks.jei;
 
 import com.simibubi.create.AllBlocks;
 import lol.roxxane.flat_pack_tweaks.Fpt;
-import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
+import lol.roxxane.flat_pack_tweaks.config.server.FptServerConfig;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;

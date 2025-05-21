@@ -2,7 +2,7 @@ package lol.roxxane.flat_pack_tweaks.mixins.create;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.kinetics.waterwheel.WaterWheelBlockEntity;
-import lol.roxxane.flat_pack_tweaks.config.FptServerConfig;
+import lol.roxxane.flat_pack_tweaks.config.server.FptServerConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
