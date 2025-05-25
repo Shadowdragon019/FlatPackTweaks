@@ -2,7 +2,6 @@ package lol.roxxane.flat_pack_tweaks.mixin_external_classes.create.lubeable_mech
 
 import com.simibubi.create.content.kinetics.saw.SawBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
-import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.accessor.LubeCountAccessor;
 import lol.roxxane.flat_pack_tweaks.tags.FptItemTags;
 import net.minecraft.core.BlockPos;
@@ -21,10 +20,6 @@ public class ApplyLubeHelper {
 	public static Optional<InteractionResult> apply_lube(BlockState state, Level level, BlockPos pos, Player player,
 		InteractionHand hand) {
 		var held_item = player.getItemInHand(hand);
-		Fpt.log(player);
-		Fpt.log(held_item);
-		Fpt.log(player.isSpectator());
-		Fpt.log(hand);
 		if (held_item.is(FptItemTags.LUBE) && !player.isSpectator() && hand == InteractionHand.MAIN_HAND &&
 			state.getBlock() instanceof SawBlock saw)
 			return Optional.of(saw.onBlockEntityUse(level, pos, be ->
@@ -35,8 +30,8 @@ public class ApplyLubeHelper {
 	private static InteractionResult apply_lube_block_entity(SawBlockEntity be, BlockState state, Level level,
 		BlockPos pos, Player player, ItemStack held_item) {
 		var lube_count_accessor = ((LubeCountAccessor) be);
-		if (lube_count_accessor.lube_count$get() < 1) {
-			lube_count_accessor.lube_count$set(10);
+		if (lube_count_accessor.lube_count$get() <= 5) {
+			lube_count_accessor.lube_count$set(lube_count_accessor.lube_count$get() + 10);
 			if (!player.isCreative())
 				player.setItemInHand(InteractionHand.MAIN_HAND,
 					held_item.copyWithCount(held_item.getCount() - 1));
