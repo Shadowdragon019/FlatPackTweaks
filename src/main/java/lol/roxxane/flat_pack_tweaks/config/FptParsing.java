@@ -264,17 +264,17 @@ public final class FptParsing {
 		else throw new IllegalArgumentException("Could not parse entry as key \"" + k + "\" could not be found");
 	}
 
-	public static <K, V, R> List<R> parse_entries(Map<K, V> m, BiFunction<K, V, R> e_func) {
+	public static <K, V, R> List<R> parse_entries(Map<K, V> map, BiFunction<K, V, R> entry_function) {
 		var list = new ArrayList<R>();
-		for (var e : m.entrySet())
-			list.add(e_func.apply(e.getKey(), e.getValue()));
+		for (var e : map.entrySet())
+			list.add(entry_function.apply(e.getKey(), e.getValue()));
 		return list;
 	}
-	public static <K, V, RK, RV> Map<RK, RV> parse_entries(Map<K, V> m, Function<K, RK> k_func,
+	public static <K, V, RK, RV> Map<RK, RV> parse_entries(Map<K, V> map, Function<K, RK> k_func,
 		Function<V, RV> v_func
 	) {
 		var new_m = new HashMap<RK, RV>();
-		for (var e : m.entrySet())
+		for (var e : map.entrySet())
 			new_m.put(k_func.apply(e.getKey()), v_func.apply(e.getValue())) ;
 		return new_m;
 	}

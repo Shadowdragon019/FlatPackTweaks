@@ -190,18 +190,35 @@ public final class FptValidating {
 		return v != null && p.test(v);
 	}
 
-	/** Applies {@code p} to every entry in the map */
-	public static boolean validate_entries(Map<String, Object> m, BiPredicate<String, Object> p) {
-		for (var e : m.entrySet())
-			if (!p.test(e.getKey(), e.getValue()))
+	/** Applies {@code predicate} to every entry in the map */
+	public static boolean validate_entries(Map<String, Object> map, BiPredicate<String, Object> predicate) {
+		if (map == null) return false;
+		for (var entry : map.entrySet())
+			if (!predicate.test(entry.getKey(), entry.getValue()))
 				return false;
 		return true;
 	}
-	/** Applies {@code k_p} to every key in the map & {@code v_p} to every value in the map */
-	public static boolean validate_entries(Map<String, Object> m, Predicate<String> k_p, Predicate<Object> v_p) {
-		if (m == null) return false;
-		for (var e : m.entrySet())
-			if (!k_p.test(e.getKey()) || !v_p.test(e.getValue()))
+	/** Applies {@code key_predicate} to every key in the map & {@code value_predicate} to every value in the map */
+	public static boolean validate_entries(Map<String, Object> map, Predicate<String> key_predicate,
+		Predicate<Object> value_predicate) {
+		if (map == null) return false;
+		for (var e : map.entrySet())
+			if (!key_predicate.test(e.getKey()) || !value_predicate.test(e.getValue()))
+				return false;
+		return true;
+	}
+
+	public static boolean validate_keys(Map<String, ?> map, Predicate<String> predicate) {
+		if (map == null) return false;
+		for (var key : map.keySet())
+			if (!predicate.test(key))
+				return false;
+		return true;
+	}
+	public static boolean validate_values(Map<?, Object> map, Predicate<Object> predicate) {
+		if (map == null) return false;
+		for (var value : map.values())
+			if (!predicate.test(value))
 				return false;
 		return true;
 	}

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,13 +36,17 @@ public final class Fpt {
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.LevelTickEvent event) -> {
 			var level = event.level;
 
-			if (!level.isClientSide) {
-				if (level instanceof ServerLevelAccessor level_with_entity_tick_list)
-					level_with_entity_tick_list.create$getEntityTickList().forEach(entity -> {
-						if (entity.isAlive() && entity instanceof ItemEntity item_entity)
-							item_in_block_transformation(item_entity);
-					});
-			}
+			if (!level.isClientSide && level instanceof ServerLevelAccessor level_with_entity_tick_list)
+				level_with_entity_tick_list.create$getEntityTickList().forEach(entity -> {
+					if (entity.isAlive() && entity instanceof ItemEntity item_entity)
+						item_in_block_transformation(item_entity);
+				});
+		});
+
+		MinecraftForge.EVENT_BUS.addListener((ItemTooltipEvent event) -> {
+			for (var entry : FptClientConfig.TOOLTIPS.get().entrySet())
+				if (event.getItemStack().getItem() == entry.getKey().asItem())
+					event.getToolTip().addAll(entry.getValue());
 		});
 		
 		// Lang

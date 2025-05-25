@@ -1,6 +1,7 @@
 package lol.roxxane.flat_pack_tweaks.config.server;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
+import com.google.common.base.Preconditions;
 import com.simibubi.create.AllItems;
 import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.recipes.InfiniDrillingRecipe;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import static lol.roxxane.flat_pack_tweaks.FptUtils.config;
 import static lol.roxxane.flat_pack_tweaks.FptUtils.list;
@@ -29,8 +31,8 @@ import static lol.roxxane.flat_pack_tweaks.config.FptValidating.*;
 public class FptServerConfig {
 	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-	public static final FptConfigValue<CommentedConfig, List<InfiniDrillingRecipe>> INFINI_DRILLING_RECIPES =
-		FptConfigValue.of(BUILDER.define("infini_drilling_recipes", config(
+	public static final Value<CommentedConfig, List<InfiniDrillingRecipe>> INFINI_DRILLING_RECIPES =
+		Value.of(BUILDER.define("infini_drilling_recipes", config(
 			"minecraft:raw_iron_block",
 					config("item", "minecraft:raw_iron", "hardness", 10.0),
 					"minecraft:bedrock",
@@ -49,8 +51,8 @@ public class FptServerConfig {
 						parse_entry(v, "hardness", parse_double),
 						parse_optional_entry(v, "generates_fire", parse_bool, false)))));
 
-	public static final FptConfigValue<List<? extends CommentedConfig>, List<ItemInBlockRecipe>>
-		ITEM_IN_BLOCK_RECIPES = FptConfigValue.of(BUILDER.defineList("block_to_item_recipes",
+	public static final Value<List<? extends CommentedConfig>, List<ItemInBlockRecipe>>
+		ITEM_IN_BLOCK_RECIPES = Value.of(BUILDER.defineList("block_to_item_recipes",
 			list(config(
 				"block", "minecraft:fire",
 				"item_in", "minecraft:netherite_scrap",
@@ -73,8 +75,8 @@ public class FptServerConfig {
 				parse_entry(map, "item_out", parse_item),
 				parse_entry(map, "consume_block", parse_bool)
 			)));
-	public static final FptConfigValue<List<? extends ArrayList<String>>, List<SwitchingRecipe>> SWITCHERS =
-		FptConfigValue.of(BUILDER.defineList("switchers",
+	public static final Value<List<? extends ArrayList<String>>, List<SwitchingRecipe>> SWITCHERS =
+		Value.of(BUILDER.defineList("switchers",
 				list(list("dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt",
 					"dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"),
 					list("iron_ore", "diamond_ore")),
@@ -82,7 +84,7 @@ public class FptServerConfig {
 			object -> parse_list(object, list -> parse_elements(list, entry ->
 				parse_list(entry, entry_list -> new SwitchingRecipe(parse_elements(entry_list, parse_item))))));
 
-	public static final FptConfigValue<String, Item> SUPER_GLUE = FptConfigValue.of(
+	public static final Value<String, Item> SUPER_GLUE = Value.of(
 		BUILDER.define("super_glue", "create:super_glue", is_item), parse_item::apply);
 
 	public static final BooleanValue REMOVE_TOOLBOX_RECIPES_FROM_JEI =
@@ -91,21 +93,13 @@ public class FptServerConfig {
 		BUILDER.define("wrench_can_pickup_anything_destructible", true);
 	public static final BooleanValue ALL_ITEMS_ARE_FIREPROOF =
 		BUILDER.define("all_items_are_fireproof", true);
-	public static final IntValue HAND_CRANK_ROTATION_SPEED =
-		BUILDER.defineInRange("hand_crank_rotation_speed",
-			32, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	public static final IntValue HAND_CRANK_ROTATION_SPEED = BUILDER.defineInRange("hand_crank_rotation_speed",
+		32, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	public static final DoubleValue WATER_WHEEL_SPEED_FACTOR =
 		BUILDER.comment("By default, water wheels have 8 speed & large water wheels have 4 speed")
 			.defineInRange("water_wheel_speed_factor", 2, 0, Double.MAX_VALUE);
 
 	public static final ForgeConfigSpec SPEC = BUILDER.build();
-
-	@SubscribeEvent
-	static void on_load(final ModConfigEvent event) {
-		if (SPEC.isLoaded())
-			for (var value : FptConfigValue.VALUES)
-				value.invalidate();
-	}
 
 	// Infini-Drilling
 	public static InfiniDrillingRecipe get_infini_drill_recipe(Block block) {
@@ -131,5 +125,41 @@ public class FptServerConfig {
 		if (item == SUPER_GLUE.get())
 			return AllItems.SUPER_GLUE.get(); // success
 		else return Items.AIR; // failure
+	}
+
+	public static final class Value<C, R> {
+		public static final ArrayList<Value<?, ?>> ALL_VALUES = new ArrayList<>();
+
+		public ForgeConfigSpec.ConfigValue<C> config_value;
+		public Function<C, R> transformer;
+		private R cached_value = null;
+
+		public Value(ForgeConfigSpec.ConfigValue<C> config_value, Function<C, R> transformer) {
+			ALL_VALUES.add(this);
+			this.config_value = config_value;
+			this.transformer = transformer;
+		}
+
+		public static <C, R> Value<C, R> of(ForgeConfigSpec.ConfigValue<C> config_value, Function<C, R> transformer) {
+			return new Value<>(config_value, transformer);
+		}
+
+		public R get() {
+			if (cached_value == null)
+				cached_value = transformer.apply(config_value.get());
+			return Preconditions.checkNotNull(cached_value,
+				"Cannot get config value before value is cached");
+		}
+
+		public void invalidate() {
+			cached_value = null;
+		}
+	}
+
+	@SubscribeEvent
+	static void on_load(final ModConfigEvent event) {
+		if (SPEC.isLoaded())
+			for (var value : Value.ALL_VALUES)
+				value.invalidate();
 	}
 }
