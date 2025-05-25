@@ -6,7 +6,6 @@ import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import lol.roxxane.flat_pack_tweaks.Fpt;
 import lol.roxxane.flat_pack_tweaks.accessor.LubeCountAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -66,11 +65,12 @@ abstract class ApplyLube extends DirectionalAxisKineticBlock implements IBE<SawB
 		if (player.isSpectator() && hand != InteractionHand.MAIN_HAND)
 			return;
 
+		/*
 		if (held_item.is(Items.STICK))
 			onBlockEntityUse(world, pos, be -> {
 				Fpt.log(LubeCountAccessor.get(be));
 				return null;
-			});
+			});*/
 
 		if (held_item.is(Items.GLASS_BOTTLE))
 		//if (held_item.is(FptItemTags.LUBE))

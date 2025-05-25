@@ -21,7 +21,6 @@ import static lol.roxxane.flat_pack_tweaks.Fpt.resource;
 import static lol.roxxane.flat_pack_tweaks.FptUtils.resource_recipe_string;
 import static lol.roxxane.flat_pack_tweaks.jei.FptJeiPlugin.INFINI_DRILLING_TEXTURE_RESOURCE;
 
-
 public class InfiniDrillingRecipeCategory extends AbstractRecipeCategory<InfiniDrillingRecipe> {
 	public InfiniDrillingRecipeCategory(IGuiHelper gui_helper) {
 		super(
@@ -35,30 +34,32 @@ public class InfiniDrillingRecipeCategory extends AbstractRecipeCategory<InfiniD
 
 	@Override
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull InfiniDrillingRecipe recipe,
-		@NotNull IFocusGroup $
-	) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 5, 60)
-			.addItemStack(recipe.block().asItem().getDefaultInstance());
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 5, 5)
-			.addItemStack(recipe.item().getDefaultInstance());
+		@NotNull IFocusGroup $) {
+		if (!recipe.block().defaultBlockState().isAir())
+			builder.addSlot(RecipeIngredientRole.INPUT, 5, 60)
+				.addItemStack(recipe.block().asItem().getDefaultInstance())
+				.addRichTooltipCallback((view, tooltip) -> {
+					if (recipe.generates_fire())
+						tooltip.add(Component.translatable("gui.flat_pack_tweaks.category.infini_drilling.input"));
+				});
+		if (!recipe.item().getDefaultInstance().isEmpty())
+			builder.addSlot(RecipeIngredientRole.OUTPUT, 5, 5)
+				.addItemStack(recipe.item().getDefaultInstance());
 	}
 
 	@Override
 	public void draw(@NotNull InfiniDrillingRecipe recipe, @NotNull IRecipeSlotsView $1,
-		@NotNull GuiGraphics graphics, double $2, double $3
-	) {
-		if (recipe.generates_fire())
-			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
-				0, 33, 26, 33, 26, 20);
-		else graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
-				0, 33, 0, 33, 26, 20);
+		@NotNull GuiGraphics graphics, double $2, double $3) {
+		if (recipe.generates_fire()) {
+			if (recipe.item_is_empty())
+				graphics.blit(ResourceLocation.parse("textures/block/fire_0.png"), 5, 5, 0, 0, 16, 16, 16, 512);
+			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE, 0, 33, 26, 33, 26, 20);
+		} else graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE, 0, 33, 0, 33, 26, 20);
 
-		// Output slot
-		graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
-			4, 59, 4, 59, 18, 18);
-		if (recipe.item() != Items.AIR)
-			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE,
-				0, 0, 0, 0, 26, 26);
+		if (!recipe.block_is_empty())
+			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE, 4, 59, 4, 59, 18, 18);
+		if (!recipe.item_is_empty())
+			graphics.blit(INFINI_DRILLING_TEXTURE_RESOURCE, 0, 0, 0, 0, 26, 26);
 	}
 
 	@Override
