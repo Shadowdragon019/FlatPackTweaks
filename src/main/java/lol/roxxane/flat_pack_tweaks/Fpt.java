@@ -11,6 +11,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,6 +22,11 @@ public final class Fpt {
 	public static final String ID = "flat_pack_tweaks";
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final Registrate REGISTRATE = Registrate.create(ID);
+
+	@SuppressWarnings("unused")
+	public static void log(Object o) {
+		LOGGER.info(o.toString());
+	}
 
 	public static ResourceLocation resource(String path) {
 		return ResourceLocation.fromNamespaceAndPath(ID, path);
@@ -35,23 +41,22 @@ public final class Fpt {
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.LevelTickEvent event) -> {
 			var level = event.level;
 
-			if (!level.isClientSide) {
-				if (level instanceof ServerLevelAccessor level_with_entity_tick_list)
-					level_with_entity_tick_list.create$getEntityTickList().forEach(entity -> {
-						if (entity.isAlive() && entity instanceof ItemEntity item_entity)
-							item_in_block_transformation(item_entity);
-					});
-			}
+			if (!level.isClientSide && level instanceof ServerLevelAccessor level_with_entity_tick_list)
+				level_with_entity_tick_list.create$getEntityTickList().forEach(entity -> {
+					if (entity.isAlive() && entity instanceof ItemEntity item_entity)
+						item_in_block_transformation(item_entity);
+				});
+		});
+
+		MinecraftForge.EVENT_BUS.addListener((ItemTooltipEvent event) -> {
+			for (var entry : FptClientConfig.TOOLTIPS.get().entrySet())
+				if (event.getItemStack().getItem() == entry.getKey().asItem())
+					event.getToolTip().addAll(entry.getValue());
 		});
 		
 		// Lang
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.switching", "Switching");
-	}
-
-	@SuppressWarnings("unused")
-	public static void log(Object o) {
-		LOGGER.info(o.toString());
 	}
 
 	private void item_in_block_transformation(ItemEntity item_entity) {
