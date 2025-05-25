@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static lol.roxxane.flat_pack_tweaks.FptStateProperties.LUBED;
 
 // TODO: Proper blockstate file thing
-@Mixin(value = SawBlock.class, remap = false)
+@Mixin(SawBlock.class)
 abstract class ApplyLube extends DirectionalAxisKineticBlock implements IBE<SawBlockEntity> {
 	private ApplyLube(Properties properties) {
 		super(properties);
