@@ -1,0 +1,14 @@
+{
+	"type": "create:cutting",
+	"ingredients": [
+		{
+			"item": "bedrock"
+		}
+	],
+	"processingTime": 1,
+	"results": [
+		{
+			"item": "barrier"
+		}
+	]
+}
