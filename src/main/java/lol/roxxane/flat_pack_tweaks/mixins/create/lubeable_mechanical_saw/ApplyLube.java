@@ -6,8 +6,7 @@ import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import lol.roxxane.flat_pack_tweaks.accessor.LubeCountAccessor;
-import lol.roxxane.flat_pack_tweaks.tags.FptItemTags;
+import lol.roxxane.flat_pack_tweaks.mixin_external_classes.create.lubeable_mechanical_saw.ApplyLubeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -50,24 +49,8 @@ abstract class ApplyLube extends DirectionalAxisKineticBlock implements IBE<SawB
 	@Inject(method = "use",
 		cancellable = true,
 		at = @At("HEAD"))
-	private void fpt$Inject$use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-		BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-		var held_item = player.getItemInHand(hand);
-		if (player.isSpectator() && hand != InteractionHand.MAIN_HAND)
-			return;
-
-		if (held_item.is(FptItemTags.LUBE))
-			cir.setReturnValue(onBlockEntityUse(world, pos, be -> {
-				var lube_count_accessor = ((LubeCountAccessor) be);
-				if (lube_count_accessor.lube_count$get() < 1) {
-					lube_count_accessor.lube_count$set(10);
-					if (!player.isCreative())
-						player.setItemInHand(InteractionHand.MAIN_HAND,
-							held_item.copyWithCount(held_item.getCount() - 1));
-					world.setBlockAndUpdate(pos, state.setValue(LUBED, true));
-					return InteractionResult.SUCCESS;
-				}
-				return InteractionResult.PASS;
-			}));
+	private void fpt$Inject$use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+		BlockHitResult $, CallbackInfoReturnable<InteractionResult> cir) {
+		ApplyLubeHelper.apply_lube(state, level, pos, player, hand).ifPresent(cir::setReturnValue);
 	}
 }

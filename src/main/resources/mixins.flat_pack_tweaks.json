@@ -23,6 +23,8 @@
 		"create.change_what_functions_as_super_glue.UpdateGlueCollectingGlueSelectionHelper",
 		"create.change_what_functions_as_super_glue.UpdateIsGlueSelectionHandler",
 		"create.lubeable_mechanical_saw.ApplyLube",
+		"create.lubeable_mechanical_saw.Deployer",
+		"create.lubeable_mechanical_saw.Jei",
 		"create.lubeable_mechanical_saw.Processing",
 		"create.lubeable_mechanical_saw.Recipe",
 		"create.lubeable_mechanical_saw.Renderer",

@@ -17,8 +17,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// TODO: JEI for lol.roxxane.mixins.create.lubeable_mechanical_saw
-// TODO: Lubed mechanical saw blade models
+// TODO: Make deployers able to lube mechanical saws
 @Mod(Fpt.ID)
 public final class Fpt {
 	public static final String ID = "flat_pack_tweaks";
@@ -37,6 +36,8 @@ public final class Fpt {
 	public Fpt(FMLJavaModLoadingContext context) {
 		context.registerConfig(ModConfig.Type.SERVER, FptServerConfig.SPEC);
 		context.registerConfig(ModConfig.Type.CLIENT, FptClientConfig.SPEC);
+
+		FptPartialModels.init();
 
 		GogglesItem.addIsWearingPredicate($ -> true);
 
@@ -61,6 +62,8 @@ public final class Fpt {
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.switching", "Switching");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling.input",
 			"§8Sparks §l§6fire §8when drilled");
+		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_1", "Requires");
+		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_2", "a dry saw");
 	}
 
 	private void item_in_block_transformation(ItemEntity item_entity) {
