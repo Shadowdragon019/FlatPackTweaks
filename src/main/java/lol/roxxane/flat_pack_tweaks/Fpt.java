@@ -57,6 +57,8 @@ public final class Fpt {
 		// Lang
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.switching", "Switching");
+		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling.input",
+			"§8Generates §l§6fire §8when drilled");
 	}
 
 	private void item_in_block_transformation(ItemEntity item_entity) {
