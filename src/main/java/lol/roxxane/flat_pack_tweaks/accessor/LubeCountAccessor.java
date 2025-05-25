@@ -11,4 +11,8 @@ public interface LubeCountAccessor {
 	static void set(Object obj, int count) {
 		((LubeCountAccessor) obj).lube_count$set(count);
 	}
+
+	static boolean has_lube(Object obj) {
+		return get(obj) > 0;
+	}
 }

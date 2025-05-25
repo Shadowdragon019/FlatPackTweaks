@@ -12,6 +12,8 @@ public class FptPartialModels {
 		SAW_BLADE_VERTICAL_REVERSED = block("mechanical_saw/blade_vertical_reversed");
 
 	private static PartialModel block(String path) {
-		return PartialModel.of(Fpt.resource("block/" + path));
+		var model = PartialModel.of(Fpt.resource("block/" + path));
+		Fpt.log(model.modelLocation());
+		return model;
 	}
 }

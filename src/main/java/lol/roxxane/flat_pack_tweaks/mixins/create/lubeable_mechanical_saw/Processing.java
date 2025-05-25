@@ -2,11 +2,16 @@ package lol.roxxane.flat_pack_tweaks.mixins.create.lubeable_mechanical_saw;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
+import lol.roxxane.flat_pack_tweaks.FptStateProperties;
 import lol.roxxane.flat_pack_tweaks.LubeHelper;
 import lol.roxxane.flat_pack_tweaks.accessor.LubeCountAccessor;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,7 +23,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Mixin(value = SawBlockEntity.class, remap = false)
-abstract class Processing implements LubeCountAccessor {
+abstract class Processing extends BlockBreakingKineticBlockEntity implements LubeCountAccessor {
+	public Processing(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
+
 	@Shadow protected abstract List<? extends Recipe<?>> getRecipes();
 
 	@Shadow private int recipeIndex;
@@ -38,6 +47,8 @@ abstract class Processing implements LubeCountAccessor {
 	private void fpt$Inject$applyRecipe(CallbackInfo ci) {
 		if (LubeHelper.requires_lube(getRecipes().get(recipeIndex)))
 			fpt$lube_count--;
+		if (lube_count$get() < 1 && level != null)
+			level.setBlockAndUpdate(worldPosition, getBlockState().setValue(FptStateProperties.LUBED, false));
 	}
 
 	@ModifyExpressionValue(method = "getRecipes",

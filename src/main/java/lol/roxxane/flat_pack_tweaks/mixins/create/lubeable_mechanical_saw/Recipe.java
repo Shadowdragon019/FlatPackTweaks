@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-// TODO: Test in multiplayer. I have no clue if this will work.
-
 @Mixin(value = CuttingRecipe.class, remap = false)
 abstract class Recipe extends ProcessingRecipe<RecipeWrapper> {
 	private Recipe(IRecipeTypeInfo typeInfo, ProcessingRecipeBuilder.ProcessingRecipeParams params) {

@@ -25,6 +25,7 @@
 		"create.lubeable_mechanical_saw.ApplyLube",
 		"create.lubeable_mechanical_saw.Processing",
 		"create.lubeable_mechanical_saw.Recipe",
+		"create.lubeable_mechanical_saw.Renderer",
 		"jei.RemoveCraftingTableAsCatalyst",
 		"lychee.RemoveBuildersButtonLongPress",
 		"minecraft.BlockHardnessLimiter",

@@ -17,6 +17,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+// TODO: JEI for lol.roxxane.mixins.create.lubeable_mechanical_saw
+// TODO: Lubed mechanical saw blade models
 @Mod(Fpt.ID)
 public final class Fpt {
 	public static final String ID = "flat_pack_tweaks";
