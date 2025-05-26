@@ -64,6 +64,7 @@ public final class Fpt {
 			"§8Sparks §l§6fire §8when drilled");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_1", "Requires");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_2", "a dry saw");
+		REGISTRATE.addRawLang("gui.flat_pack_tweaks.saw_lube", "§7    Remaining uses of lube: §a%s");
 	}
 
 	private void item_in_block_transformation(ItemEntity item_entity) {
