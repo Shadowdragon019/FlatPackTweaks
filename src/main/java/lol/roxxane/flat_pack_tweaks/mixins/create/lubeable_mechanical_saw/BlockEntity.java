@@ -7,8 +7,10 @@ import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import lol.roxxane.flat_pack_tweaks.FptStateProperties;
 import lol.roxxane.flat_pack_tweaks.LubeHelper;
 import lol.roxxane.flat_pack_tweaks.accessor.LubeCountAccessor;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,8 +25,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Mixin(value = SawBlockEntity.class, remap = false)
-abstract class Processing extends BlockBreakingKineticBlockEntity implements LubeCountAccessor {
-	public Processing(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+abstract class BlockEntity extends BlockBreakingKineticBlockEntity implements LubeCountAccessor {
+	public BlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
@@ -81,5 +83,15 @@ abstract class Processing extends BlockBreakingKineticBlockEntity implements Lub
 	@Override
 	public void lube_count$set(int count) {
 		fpt$lube_count = count;
+	}
+
+	// IHaveGoggleInformation
+	@Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean player_is_sneaking) {
+		var result = super.addToGoggleTooltip(tooltip, player_is_sneaking);
+		if (fpt$lube_count > 0)
+			tooltip.add(Component.translatable("gui.flat_pack_tweaks.saw_lube",
+				Component.literal(""+fpt$lube_count).withStyle(ChatFormatting.GREEN)));
+		return result || fpt$lube_count > 0;
 	}
 }
