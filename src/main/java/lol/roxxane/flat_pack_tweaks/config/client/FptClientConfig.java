@@ -29,7 +29,9 @@ public class FptClientConfig {
 	public static final Value<CommentedConfig, Map<Item, List<Component>>> TOOLTIPS = Value.of(
 		BUILDER.define("tooltips",
 			config("minecraft:dirt", list("gui.flat_pack_tweaks.category.infini_drilling",
-				"gui.flat_pack_tweaks.category.switching")),
+				"gui.flat_pack_tweaks.category.switching"),
+				"minecraft:stone", list("gui.flat_pack_tweaks.category.infini_drilling",
+					"gui.flat_pack_tweaks.category.switching")),
 			o -> validate_map(o, m -> validate_entries(m, is_item::test, is_list))),
 		o -> parse_map(o, m ->
 			FptParsing.parse_entries(m, parse_item::apply, v ->

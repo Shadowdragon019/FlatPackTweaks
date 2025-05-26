@@ -61,7 +61,7 @@ public final class Fpt {
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling", "Infini-Drilling");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.switching", "Switching");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.infini_drilling.input",
-			"§8Sparks §l§6fire §8when drilled");
+			"§7Sparks §l§6fire §7when drilled");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_1", "Requires");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.category.sawing.dry_2", "a dry saw");
 		REGISTRATE.addRawLang("gui.flat_pack_tweaks.saw_lube", "§7    Remaining uses of lube: §a%s");
