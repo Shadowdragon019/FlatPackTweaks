@@ -17,6 +17,7 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,7 @@ public class FptServerConfig {
 	}
 
 	// Item In Block Recipe
-	public static ItemInBlockRecipe get_item_in_block_recipe(Block block, Item item) {
+	public static @Nullable ItemInBlockRecipe get_item_in_block_recipe(Block block, Item item) {
 		for (var recipe : ITEM_IN_BLOCK_RECIPES.get())
 			if (recipe.block() == block && recipe.item_in() == item)
 				return recipe;
