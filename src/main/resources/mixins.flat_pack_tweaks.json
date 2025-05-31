@@ -22,6 +22,8 @@
 		"create.change_what_functions_as_super_glue.SuperGlueEntityItemRequirement",
 		"create.change_what_functions_as_super_glue.UpdateGlueCollectingGlueSelectionHelper",
 		"create.change_what_functions_as_super_glue.UpdateIsGlueSelectionHandler",
+		"create.extend_value_settings_size.AirStackSize",
+		"create.extend_value_settings_size.Behavior",
 		"create.lubeable_mechanical_saw.Block",
 		"create.lubeable_mechanical_saw.BlockEntity",
 		"create.lubeable_mechanical_saw.Deployer",
