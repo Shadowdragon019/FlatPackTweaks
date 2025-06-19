@@ -38,5 +38,10 @@
 		"minecraft.everything_is_minable.BlockBehaviour",
 		"minecraft.everything_is_minable.DiggerItem",
 		"minecraft.everything_is_minable.TierSortingRegistry"
+	],
+	"client": [
+		"minecraft.RemoveOptionsDifficultyButton",
+		"minecraft.predetermined_world_settings.OnlyGameTab",
+		"minecraft.predetermined_world_settings.RemoveDifficultyGameTab"
 	]
 }
