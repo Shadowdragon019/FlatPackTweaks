@@ -10,6 +10,7 @@
 		"create.ChangeSequenceAssemblyIcon",
 		"create.ConfigurableHandCrankSpeed",
 		"create.ConfigurableWaterWheelSpeed",
+		"create.GearboxDropsFromLootTable",
 		"create.InfiniDrilling",
 		"create.MotorRemoveSpeedSelector",
 		"create.RemoveToolboxRecipesFromJei",
